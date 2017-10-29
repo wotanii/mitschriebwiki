@@ -6,13 +6,14 @@
 \usepackage{longtable}
 
 \newunicodechar{×}{\times}
-\newunicodechar{↦}{\mapsto}
 \newunicodechar{∀}{\forall}
 \newunicodechar{∅}{\varnothing}
 \newunicodechar{∩}{\cap}
-\newunicodechar{⇒}{\Rightarrow}
 \newunicodechar{α}{\alpha}
 \newunicodechar{σ}{\sigma}
+\newunicodechar{⇒}{\Rightarrow}
+\newunicodechar{→}{\rightarrow}
+\newunicodechar{↦}{\mapsto}
 
 
 \lecturer{Dr. C. Schmoeger}
@@ -35,10 +36,14 @@
 
 \section{Über dieses Skriptum}
 
-Dieses Dokument ist eine Kurzfassung des Ana3-Bachelor-Mitschriebes  der Vorlesung \glqq Analysis III\grqq\ von Herrn Schmoeger im
+Dieses Dokument basiert auf dem Mitschrieb der Vorlesung \glqq Analysis III\grqq\ von Herrn Schmoeger im
 Wintersemester 2010 an der Universität Karlsruhe (KIT). \\
 
 Herr Schmoeger ist für den Inhalt nicht verantwortlich.
+
+\section{Warum}
+
+Diesen Dokument enthält alle relevanten Qefinitionen der Vorlesung. Dieses Dokument ist sozusagen die Header-Datei und das Skript  ist die Implementierung. Um die Vorlesung zu verstehen muss man alle Definitionen verinnerlichen. Es wird empfohle diese Dokument als Vorlesung auf die Vorlesung durchzuarbeiten.  
 
 \section{Wer}
 Gestartet wurde das Projekt von Joachim Breitner. Beteiligt an dem ursprünglichem  Mitschrieb sind Rebecca Schwerdt, Philipp Ost, Jan Ihrens, Peter Pan und Benjamin Unger.
@@ -59,21 +64,29 @@ beteiligen. Auf Wunsch ist auch ein Zugang über \emph{Subversion} möglich.
 
 \chapter{Vorbereitungen}
 \label{Kapitel 0}
-Symbole in diesem Dokument:
+\textbf{Symbole in diesem Dokument:}
+
+Kapitel 0: 
 
 $X,Y,Z$ Mengen ($\ne\varnothing$) \\
 $f:X\to Y, g:Y\to Z$ Abbildungen. \\
 $ x \in X, y \in Y, z \in Z$ \\
-$A \subseteq X, B \subseteq Y, C \subseteq Z $ \\
+$A \subseteq X, B \subseteq Y, C \subseteq Z $
 
+Kapitel 1:
 
- $I_1,\ldots,I_d$ Intervalle in $\mdr$\\
- $a=(a_1,\ldots,a_d), b=(b_1,\ldots,b_d)\in\mdr^d$\\
- 
- $\fa:$ $\sigma$-Algebra auf $X$\\
- $\mu:\fa\to[0,+\infty]$ eine Abbildung.\\
+Sei \(d\in\MdN\). (Dimension der betrachteten Intervalle)
+$I_1,\ldots,I_d$ Intervalle in $\mdr$\\
+$a=(a_1,\ldots,a_d), b=(b_1,\ldots,b_d)\in\mdr^d$\\
 
+$\fa:$ $\sigma$-Algebra auf $X$\\
+$\mu:\fa\to[0,+\infty]$ eine Abbildung.\\
 
+Kapitel 2:
+
+\(\ci_{d}:=\{(a,b]\mid a,b\in\MdR^{d},\,a\leq b\}\) Menge der Halboffenen Intervalle
+
+\newpage
 \textbf{Schreibweisen / Bekanntes:}
 
 \begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
@@ -125,11 +138,11 @@ $A \subseteq X, B \subseteq Y, C \subseteq Z $ \\
   \textbf{Name} & \textbf{Symbol} & \textbf{$:=$ Definition} & \textbf{in Worten/Kommentar} \\ 
   \hline
   $\sigma$-Algebra& $\fa$ & $\fa\subseteq\mathcal{P}(X)$ mit 
-\begin{enumerate}
-\item[($\sigma_1$)] $X\in\fa$
-\item[($\sigma_2$)] $A\in\fa ⇒ A^c\in\fa$.
-\item[($\sigma_3$)] $(A_j)$ ist Folge in $\fa $ \newline $⇒ \bigcup A_j\in\fa$.
-\end{enumerate} & Das sind alle mölicher Kombinationen unter Veneinigung, Komplement, Schnitt, etc. \\
+	\begin{enumerate}
+	\item[($\sigma_1$)] $X\in\fa$
+	\item[($\sigma_2$)] $A\in\fa ⇒ A^c\in\fa$.
+	\item[($\sigma_3$)] $(A_j)$ ist Folge in $\fa $ \newline $⇒ \bigcup A_j\in\fa$.
+	\end{enumerate} & Das sind alle mölicher Kombinationen unter Veneinigung, Komplement, Schnitt, etc. \\
   \hline
   Erzeuger & $\sigma(\mathcal{E})$ & $$\bigcap_{\fa\in\cf}\fa $$ \newline mit $\cf :=$ Menge der $\sigma$ Algebren auf $X$, die $\mathcal{E}$ enthalten  & Kleintse $\sigma$-Algebra, die  $\mathcal{E}$ enthält. \newline „Die von $\mathcal{E}$ erzeugte $\sigma$-Algebra“ \\
   \hline
@@ -174,373 +187,83 @@ $A \subseteq X, B \subseteq Y, C \subseteq Z $ \\
   \hline
   Wahrscheinlichkeitsmaß&&$\mu(X)=1$&\\
   \hline
-  Punktmaß\newline / Dirac-Maß &  $\delta_{x_0}(A)$ & $\begin{cases}
-1,\ x_0\in A\\
-0,\ x_0\not\in A
-\end{cases}$ & \emph{misst}, ob der \emph{Punkt} in der Menge ist \\
-  \hline
+	Punktmaß\newline / Dirac-Maß &  $\delta_{x_0}(A)$ & $\begin{cases}
+	1,\ x_0\in A\\
+	0,\ x_0\not\in A
+	\end{cases}$ & \emph{misst}, ob der \emph{Punkt} in der Menge ist \\
+	\hline
   &&&\\
   \hline
-  Zählmaß&&&\\
-  \hline
-  &&&\\
-  \hline
-  &&&\\
+  Zählmaß&$\mu:\fa\to[0,+\infty]$& 
+	$\mu(A):=\begin{cases}
+	0&,A=\varnothing\\
+	\sum_{j\in A}p_j&,A\ne\varnothing
+	\end{cases}$
+	\newline mit $(p_j)$ Folge in $[0,+\infty]$&Summiert/Zählt die Folgenglieder, deren index in der Menge A sind \\
   
 \end{longtable}
 
-
-\begin{beispiel}
-\index{Punktmaß}\index{Maß!Punkt-}
-\index{Dirac-Maß}\index{Maß!Dirac-}
-\index{Zählmaß}\index{Maß!Zähl-}
-\begin{enumerate}
-\item Sei $\fa=\cp(X)$ und $x_0\in X$. $\delta_{x_0}:\fa\to[0,+\infty]$ sei definiert durch:
-\[\delta_{x_0}(A):=
-\begin{cases}
-1,\ x_0\in A\\
-0,\ x_0\not\in A
-\end{cases}\]
-Klar ist, dass $\delta_{x_0}(\varnothing)=0$ ist.\\
-Sei $(A_j)$ eine disjunkte Folge in $\fa$.
-\[\delta_{x_0}(\bigcup A_j)=
-\left.\begin{cases}
-1,\ x_0\in\bigcup A_j\\
-0,\ x_0\not\in\bigcup A_j
-\end{cases}\right\}=\sum\delta_{x_0}(A_j)\]
-$\delta_{x_0}$ ist ein Maß auf $\cp(X)$ und heißt \textbf{Punktmaß} oder \textbf{Dirac-Maß}.
-\item Sei $X:=\mdn$, $\fa:=\cp(X)$ und $(p_j)$ eine Folge in $[0,+\infty]$. Definiere $\mu:\fa\to[0,+\infty]$ durch:
-\begin{align*}
-\mu(A):=
-\begin{cases}
-0&,A=\varnothing\\
-\sum_{j\in A}p_j&,A\ne\varnothing
-\end{cases}
-\end{align*}
-Übung: $\mu$ ist ein Maß auf $\fa=\cp(\mdn)$ und heißt ein \textbf{Zählmaß}. Sind alle $p_j=1$, so ist $\mu(A)$ gerade die Anzahl der Elemente von $A$.
-\item Sei $(X,\fa,\mu)$ ein Maßraum, $\varnothing\ne Y\subseteq X$ und $\fa_0\subseteq\fa$ eine $\sigma$-Algebra auf $Y$. Definiere $\mu_0:\fa_0\to[0,+\infty]$ durch $\mu_0(A):=\mu(A)$ ($A\in\fa_0$). Dann ist $(Y,\fa_0,\mu_0)$ ein Maßraum.\\
-Ist spezieller $Y\in\fa$, so ist $\fa_0:=\fa_Y\subseteq\fa$ und man definiert $\mu_{|Y}:\fa_Y\to[0,+\infty]$ durch $\mu_{|Y}(A):=\mu(A)$.
-\end{enumerate}
-\end{beispiel}
-
-\begin{satz}
-\label{Satz 1.7}
-\((X,\fa,\mu)\) sei ein Ma\ss raum, es seien \(A,B\in\fa\) und \((A_{j})\) sei eine Folge in \(\fa\). Dann:
-\begin{enumerate}
-\item \(A\subseteq B\,\implies\,\mu(A)\leq\mu(B)\)
-\item Ist \(\mu(A)<\infty\) und \(A\subseteq B,\implies\,\mu(B\setminus A)=\mu(B)-\mu(A)\)
-\item Ist \(\mu\) endlich, dann ist \(\mu(A)<\infty\) und \(\mu(A^{c})=\mu(X)-\mu(A)\)
-\item \(\mu\left(\bigcup A_{j}\right)\leq\sum{\mu(A_{j})}\) (\(\sigma\)-Subadditivit\"at)
-\item Ist \(A_{1}\subseteq A_{2}\subseteq A_{3}\subseteq\cdots\), so ist \(\mu(\bigcup A_{j})=\lim_{n\to\infty}{\mu(A_{n})}\)
-\item Ist \(A_{1}\supseteq A_{2}\supseteq A_{3}\supseteq\cdots\) und \(\mu(A)<\infty\), so ist
-	\(\mu(\bigcap A_{j})=\lim_{n\to\infty}{\mu(A_{n})}\)
-\end{enumerate}
-\end{satz}
 
 \chapter{Das Lebesguema\ss}
 \label{Kapitel 2}
 \index{Lebesguemaß}
 
-
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & \textbf{Symbol} & \textbf{$:=$ Definition} & \textbf{in Worten/Kommentar} \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-\textbf{Definitionen}:
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & \textbf{Symbol} & \textbf{$:=$ Definition} & \textbf{in Worten/Kommentar} \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
-
-In diesem Kapitel sei \(X\) eine Menge, \(X\neq\varnothing\).
-\begin{definition}
-\index{Ring}
-Sei \(\varnothing\neq\mathfrak{R}\subseteq\mathcal{P}(X)\). \(\mathfrak{R}\)
-hei\ss t ein \textbf{Ring} (auf \(X\)), genau dann wenn gilt:
-\begin{enumerate}
-\item \(\varnothing\in\mathfrak{R}\)
-\item \(A,B\in\mathfrak{R}\,\implies\,A\cup B,\,B\setminus A\in\mathfrak{R}\)
-\end{enumerate}
-\end{definition}
-\begin{definition}
-\index{Elementarvolumen}
-\index{Figuren}
-Sei \(d\in\MdN\).
-\begin{enumerate}
-\item \(\ci_{d}:=\{(a,b]\mid a,b\in\MdR^{d},\,a\leq b\}\).
-Seien \(a=(a_{1},\ldots,a_{d}),\,b=(b_{1},\ldots,b_{d})\in\MdR^d\) und \(I:=(a,b]\in \ci_{d}\)
-\[
-\lambda_{d}(I)=\begin{cases}0&\text{falls }I=\varnothing\\(b_{1}-a_{1})(b_{2}-a_{2})\cdots(b_{d}-a_{d})&\text{falls }I\neq\varnothing\end{cases}\quad\text{(\textbf{Elementarvolumen})}
-\]
-\item \(\cf_d:=\left\{\bigcup_{j=1}^{n}I_{j}\mid n\in\MdN,\,I_{1},\ldots,I_{n}\in \ci_{d}\right\}\) (\textbf{Menge der Figuren})
-\end{enumerate}
-\end{definition}
 Ziel dieses Kapitels: Fortsetzung von \(\lambda_{d}\) auf \(\cf_{d}\) und dann auf \(\fb_d\) (\(\leadsto\) Lebesguema\ss)
 
 Beachte: \(\ci_{d}\subseteq\cf_{d}\subseteq\fb_{d}\overset{1.4}{\implies}\fb_{d}=\sigma(\ci_{d})=\sigma(\cf_{d})\)
-\begin{lemma}
-\label{Lemma 2.1}
-Seien \(I,I'\in\ci_{d}\) und \(A\in\cf_{d}\). Dann:
-\begin{enumerate}
-\item \(I\cap I'\in\ci_{d}\)
-\item \(I\setminus I'\in\cf_{d}.\) Genauer: \(\exists\left\{I_{1}',\ldots,I_{l}'\right\}\subseteq\ci_{d}\) disjunkt:
-\(I\setminus I'=\bigcup_{j=1}^{l}{I_{j}'}\) % \bigcupdot
-\item \(\exists\left\{I_{1}',\ldots,I_{l}'\right\}\subseteq\ci_{d}\) disjunkt: \(A=\bigcup_{j=1}^{l}{I_{j}'}\)
-\item \(\cf_d\) ist ein Ring.
-\end{enumerate}
-\end{lemma}
-\begin{beweis}
-\begin{enumerate}
-\item Sei \(I=\prod_{k=1}^{d}{(a_{k},b_{k}]},\,I'=\prod_{k=1}^{d}{(\alpha_{k},\beta_{k}]};\,\alpha_{k}':=\max\{\alpha_{k},a_{k}\},\,\beta_{k}':=\min\{\beta_{k},b_{k}\}\)
 
-Ist \(\alpha_{k}'\geq\beta_{k}'\) f\"ur ein \(k\in\{1,\ldots,d\}\), so ist \(I\cap I'=\varnothing\in\ci_{d}\).
-Sei \(\alpha_{k}'<\beta_{k}'\forall k\in\{1,\ldots,d\}\), so ist \(I\cap I'=\prod_{k=1}^{d}{(\alpha_{k}',\beta_{k}']\in\ci_{d}}\)
-\item Induktion nach \(d\):
-\begin{itemize}
-\item[I.A.] Klar \checkmark % hier fehlt noch eine Graphik
-\item[I.V.] Die Behauptung gelte f\"ur ein \(d\geq 1\)
-\item[I.S.] Seien \(I,I'\in\ci_{d+1}\). Es existieren \(I_{1},I_{1}'\in\ci_{1}\) und \(I_{2},I_{2}'\in\ci_{d}\) mit:
-\(I=I_{1}\times I_{2},\,I'=I_{1}'\times I_{2}'\)
-% Graphik einfuegen!
+\textbf{Definitionen}:
 
-Nachrechnen: 
-\[
-I\setminus I'=(I_{1}\setminus I_{1}')\times I_{2}\dot \cup(I_{1}\cap I_{1}')\times(I_{2}\setminus I_{2}')
-\]
-I.A.\(\implies\,I_{1}\setminus I_{1}'=\) endliche disjunkte Vereinigung von Elementen aus \(\ci_{1}\)\\
-I.V.\(\implies\,I_{2}\setminus I_{2}'=\) endliche disjunkte Vereinigung von Elementen aus \(\ci_{d}\)\\
-Daraus folgt die Behauptung f\"ur \(d+1\)
-\end{itemize}
-\item Wir zeigen mit Induktion nach \(n\): ist \(A=\bigcup_{j=1}^{n}{I_{j}}\) mit \(I_{1},\ldots,I_{d}\in\ci_{d}\), so
-existiert \(\{I_{1}',\ldots,I_{l}'\}\subseteq\ci_{d}\) disjunkt: 
-\(A=\bigcup_{j=1}^{l}{I_{j}'}\)
-\begin{itemize}
-\item[I.A.] \(n=1:\,A=I_{1}\)\checkmark
-\item[I.V.] Die Behauptung gelte f\"ur ein \(n\geq 1\)
-\item[I.S.] Sei \(A=\bigcup_{j=1}^{n+1}{I_{j}}\quad(I_{1},\ldots,I_{n+1}\in\ci_{d})\)
-
-IV\(\,\implies\,\exists\{I_{1}',\ldots,I_{l}'\}\subseteq\ci_{d}\) disjunkt:
-\(\bigcup_{j=1}^{n}{I_{j}}=\bigcup_{j=1}^{l}{I_{j}'}\)	% \bigcupdot...
-
-Dann: \(A=I_{n+1}\cup\bigcup_{j=1}^{l}{I_{j}'}=I_{n+1}\cup\bigcup_{j=1}^{l}{(I_{j}'\setminus I_{n+1})}\) % \cupdot...
-
-Wende (2) auf jedes \(I_{j}'\setminus I_{n+1}\) an \((j=1,\ldots,l)\): 
-\(I_{j}'\setminus I_{n+1}=\bigcup_{j=1}^{l_{j}}{I_{j}''}\quad(I_{j}''\in\ci_{d})\)
-
-Damit folgt:
-\[
-A=I_{n+1}\cup\bigcup_{j=1}^{l}{\left(\bigcup_{j=1}^{l_{j}}{I_{j}''}\right)}
-\]
-Daraus folgt die Behauptung f\"ur \(n+1\).
-\end{itemize}
-\item \((a,a]=\varnothing\implies\varnothing\in\cf_{d}\)
-
-Seien \(A,B\in\cf_{d}\). Klar: \(A\cup B\in\cf_{d}\)
-
-Sei \(A=\bigcup_{j=1}^{n}{I_{j}},\,B=\bigcup_{j=1}^{n}{I_{j}'}\quad(I_{j},I_{j}'\in\ci_{d})\). Zu zeigen: \(B\setminus A\in\cf_{d}\)
-\begin{itemize}
-\item[I.A.] \(n=1:\,A=I_{1}\implies B\setminus A=\bigcup_{j=1}^{n}(\underbrace{I_{j}'\setminus I_{j}}_{\in\cf_{d}})\). Wende
-(2) auf jedes \(I_{j}'\setminus I_{1}\) an. Aus (2) folgt dann \(B\setminus A\in\cf_{d}\).
-\item[I.V.] Die Behauptung gelte f\"ur ein \(n\in\MdN\)
-\item[I.S.] Sei \(A'=A\cup I_{n+1}\quad(I_{n+1}\in\ci_{d})\). Dann:
-\[
-B\setminus A'=\underbrace{(B\setminus A)}_{\in\cf_{d}}\setminus\underbrace{I_{n+1}}_{\in\cf_{d}}\in\cf_{d}
-\]
-\end{itemize}
-\end{enumerate}
-\end{beweis}
-
-\begin{lemma}
-\label{Lemma 2.2}
-Sei \(A\in\cf_{d}\) und \(\{I_{1},\ldots,I_{n}\}\subseteq\ci_{d}\) disjunkt und
-\(\{I_{1}',\ldots,I_{m}'\}\subseteq\ci_{d}\) disjunkt mit 
-\(\bigcup_{j=1}^{n}{I_{j}}=A=\bigcup_{j=1}^{m}{I_{j}'}\). Dann:
-\[
-\sum_{j=1}^{n}{\lambda_{d}(I_{j})}=\sum_{j=1}^{m}{\lambda_{d}(I_{j}')}
-\]
-\end{lemma}
-\begin{definition}
-Sei \(A\in\cf_{d}\) und \(A=\bigcup_{j=1}^{n}{I_{j}}\) mit \(\{I_{1},\ldots,I_{n}\}\subseteq\ci_{d}\)
-disjunkt (beachte Lemma \ref{Lemma 2.1}, Punkt 3).
-\[
-\lambda_{d}(A):=\sum_{j=1}^{n}{\lambda_{d}(I_{j})}
-\]
-Wegen Lemma \ref{Lemma 2.2} ist \(\lambda_{d}:\cf_{d}\to[0,\infty)\)
-wohldefiniert.
-\end{definition}
-\begin{satz}
-\label{Satz 2.3}
-Seien \(A,B\in\cf_{d}\) und \((B_{n})\) sei eine Folge in \(\cf_{d}\).
-\begin{enumerate}
-\item \(A\cap B=\varnothing\implies\lambda_{d}(A\cup B)=\lambda_{d}(A)+\lambda_{d}(B)\)
-\item \(A\subseteq B\implies\lambda_{d}(A)\leq\lambda_{d}(B)\)
-\item \(\lambda_{d}(A\cup B)\leq\lambda_{d}(A)+\lambda_{d}(B)\)
-\item Sei \(\delta>0\). Es existiert \(C\in\cf_{d}:\overline{C}\subseteq B\) und
-\(\lambda_{d}(B\setminus C)\leq\delta\).
-\item Ist \(B_{n+1}\subseteq B_{n}\forall n\in\mdn\) und \(\bigcap B_{n}=\varnothing\), so gilt: \(\lambda_{d}(B_{n})\to 0\,(n\to \infty)\)
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Aus Lemma \ref{Lemma 2.1} folgt: Es existiert 
-\(\{I_{1},\ldots,I_{n}\}\subseteq\ci_{d}\)
-disjunkt und es existiert \(\{I_{1}',\ldots,I_{m}'\}\subseteq\ci_{d}\) disjunkt:
-\(A=\bigcup_{j=1}^{n}{I_{j}},\,B=\bigcup_{j=1}^{m}{I_{j}'}\).
-
-\(J:=\{I_{1},\ldots,I_{n},I_{1}',\ldots,I_{m}'\}\subseteq\ci_{d}\). Aus 
-\(A\cap B=\varnothing\) folgt: \(J\) ist disjunkt. Dann: 
-\(A\cup B=\bigcup_{I\in J}{I}\)	% Hier auch wieder: \bigcupdot
-
-Also:
-\begin{align*}
-\lambda_{d}(A\cup B)&=\sum_{I\in J}{\lambda_{d}(I)}\\
-    &=\sum_{j=1}^{n}{\lambda_{d}(I_{j})}+\sum_{j=1}^{m}{\lambda_{d}(I_{j}')}\\
-    &=\lambda_{d}(A)+\lambda_{d}(B)
-\end{align*}
-\item wie bei Satz \ref{Satz 1.7}
-\item \(\lambda_{d}(A\cup B)=\lambda(A\cup(B\setminus A))\overset{(1)}{=}\lambda_{d}(A)+\lambda_{d}(B\setminus A)\overset{(2)}{\leq}\lambda_{d}(A)+\lambda_{d}(B)\) % \cupdot...
-\item \"Ubung; es gen\"ugt zu betrachten: \(B\in\ci_{d}\) % Graphik einfuegen
-\item Sei \(\varepsilon>0\). Aus (4) folgt: Zu jedem \(B_{n}\) existiert ein
-\(C_{n}\in\cf_{d}:\overline{C}_{n}\subseteq B_{n}\) und
-\begin{equation}
-\label{eq: Abschaetzung Mass -- Beweis Satz 2.3.(5)}
-\lambda_{d}(B_{n}\setminus C_{n})\leq\frac{\varepsilon}{2^{n}}
-\end{equation}
-Dann:
-\(\bigcap{\overline{C}_{n}}\subseteq\bigcap{B_{n}}=\varnothing\implies\bigcup{\overline{C}_{n}^{c}}=\mdr^{d}\implies\underbrace{\overline{B}_{1}}_{\text{kompakt}}\subseteq\bigcup{\underbrace{\overline{C}_{n}^{c}}_{\text{offen}}}\)
-
-Aus der Definition von Kompaktheit (Analysis II, \S 2) folgt:
-\(\exists m\in\mdn:\,\bigcup_{j=1}^{m}{\overline{C}_{j}^{c}}\supseteq\overline{B}_{1}\)
-Dann: \(\bigcap_{j=1}^{m}{\overline{C}_{j}}\subseteq\overline{B}_{1}^{c}\).
-Andererseits: \(\bigcap_{j=1}^{m}{\overline{C}_{j}}\subseteq\bigcap_{j=1}^{m}{B_{j}}\subseteq B_{1}\subseteq\overline{B}_{1}\). 
-
-Also: \(\bigcap_{j=1}^{m}{\overline{C}_{j}}=\varnothing\). Das hei\ss t:
-\(\bigcap_{j=1}^{n}{\overline{C}_{j}}=\varnothing\,\forall n\geq m\)
-
-\(D_{n}:=\bigcap_{j=1}^{n}{C_{j}}\). Dann: \(D_{n}=\varnothing\,\forall n\geq m\)
-
-\textbf{Behauptung:} \(\lambda_{d}(B_{n}\setminus D_{n})\leq\left(1-\frac{1}{2^{n}}\right)\ep\,\forall n\in\mdn\)
-\begin{beweis}
-\begin{itemize}
-\item[I.A.] \(\lambda_{d}(B_{1}\setminus D_{1})=\lambda_{d}(B_{1}\setminus C_{1})\overset{\eqref{eq: Abschaetzung Mass -- Beweis Satz 2.3.(5)}}{\leq}\frac{\ep}{2}=\left(1-\frac{1}{2}\right)\ep\) \checkmark
-\item[I.V.] Die Behauptung gelte f\"ur ein \(n\in\mdn\).
-\item[I.S.] \begin{align*}
-    \lambda_{d}(B_{n+1}\setminus D_{n+1})&=\lambda_{d}\left((B_{n+1}\setminus D_{n})\cup(B_{n+1}\setminus C_{n+1})\right)\\
-    &\overset{(3)}{\leq}\lambda_{d}(\underbrace{B_{n+1}\setminus D_n}_{\subseteq B_{n}\setminus D_{n}})+\underbrace{\lambda_{d}(B_{n+1}\setminus C_{n+1})}_{\overset{\eqref{eq: Abschaetzung Mass -- Beweis Satz 2.3.(5)}}{\leq}\frac{\ep}{2^{n+1}}}\\
-    &\overset{(2)}{\leq}\lambda_{d}(B_{n}\setminus D_{n})+\frac{\ep}{2^{n+1}}\\
-    &\overset{\text{I.V.}}{\leq}\left(1-\frac{1}{2^{n}}\right) \ep +\frac{\ep}{2^{n+1}}\\
-&=\left(1-\frac{1}{2^{n+1}}\right)\ep
-    \end{align*}
-\end{itemize}
-\end{beweis}
-
-F\"ur \(n\geq m:\,D_{n}=\varnothing\,\implies\,\lambda_{d}(B_{n})=\lambda_{d}(B_{n}\setminus D_{n})\leq\left(1-\frac{1}{2^{n}}\right)\varepsilon\leq\varepsilon\)
-\end{enumerate}
-\end{beweis}
-
-\begin{definition}
-\index{Prämaß}
-Es sei \(\fr\) ein Ring auf \(X\). Eine Abbildung \(\mu:\fr\to[0,\infty]\) 
-hei\ss t ein \textbf{Prämaß} \ auf \(\fr\), wenn gilt:
-\begin{enumerate}
-\item \(\mu(\varnothing)=0\)
-\item Ist \(A_{j}\) eine disjunkte Folge in \(\fr\) und \(\bigcup{A_{j}}\in\fr\), so ist \(\mu\left(\bigcup{A_{j}}\right)=\sum{\mu(A_{j})}\).
-\end{enumerate}
-\end{definition}
-
-\begin{satz}
-\label{Satz 2.4}
-\(\lambda_{d}:\cf_{d}\to[0,\infty]\) ist ein Pr\"ama\ss .
-\end{satz}
-\begin{beweis}
-\begin{enumerate}
-\item Klar: \(\lambda_{d}(\varnothing)=0\)
-\item Sei \(A_{j}\) eine disjunkte Folge in \(\cf_{d}\) und \(A:=\bigcup{A_{j}}\in\cf_{d}\).
-
-\(B_{n}:=\bigcup_{j=n}^{\infty}{A_{j}}\,(n\in\mdn)\); \((B_{n})\) hat die
-Eigenschaften aus \ref{Satz 2.3}, Punkt 5. Also: \(\lambda_{d}(B_{n})\to 0\).
-
-F\"ur \(n\geq 2\):
-\[
-\lambda_{d}(A)=\lambda_{d}(A_{1}\cup\cdots\cup A_{n-1}\cup B_{n})\overset{\ref{Satz 2.3}.(1)}{=}\sum_{j=1}^{n-1}{\lambda_{d}(A_{j})}+\lambda_{d}(B_{n})
-\]
-Daraus folgt: 
-\[
-\sum_{j=1}^{n-1}{\lambda_{d}(A_{j})}=\lambda_{d}(A)-\lambda_{d}(B_{n})\quad\forall n\geq 2
-\]
-Mit \(n\to\infty\) folgt die Behauptung.
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}[Fortsetzungssatz von Carath\'eodory]
-\label{Satz 2.5}
-Sei \(\fr\) ein Ring auf \(X\) und \(\mu:\fr\to[0,\infty]\) ein Pr\"ama\ss. Dann
-existiert ein Ma\ss raum \((X,\fa(\mu),\overline{\mu})\) mit
-\begin{enumerate}
-\item \(\sigma(\fr)\subseteq\fa(\mu)\)
-\item \(\overline{\mu}(A)=\mu(A)\,\forall A\in\fr\)
-\end{enumerate}
-Insbesondere: \(\overline{\mu}\) ist ein Ma\ss \ auf \(\sigma(\fr)\).
-\end{satz}
-
-\begin{satz}[Eindeutigkeitssatz]
-\label{Satz 2.6}
-Sei \(\varnothing\neq\ce\subseteq\cp(X)\), es seien \(\nu,\,\mu\) Ma\ss e auf
-\(\sigma(\ce)\) und es gelte: \(\mu(E)=\nu(E)\,\forall E\in\ce\).
-
-Weiter gelten:
-\begin{enumerate}
-\item \(E,F\in\ce\implies E\cap F\in\ce\quad\text{(durchschnittstabil)}\)
-\item Es existiert eine Folge \((E_{n})\) in \(\ce\): \(\bigcup{E_{n}}=X\) und
-\(\mu(E_{n})<\infty\forall n\in\mdn\).
-\end{enumerate}
-Dann: \(\mu=\nu\) auf \(\sigma(\ce)\).
-\end{satz}
-
-\begin{satz}%[Lebesguema\ss]
-\label{Satz 2.7}
-\index{Lebesguemaß}
-Es gibt genau eine Fortsetzung von \(\lambda_{d}:\cf_{d}\to[0,\infty]\) auf
-\(\fb_{d}\) zu einem Ma\ss. Diese Fortsetzung hei\ss t \textbf{Lebesguemaß} \ (L-Ma\ss)
-und wird ebenfalls mit \(\lambda_{d}\) bezeichnet.
-\end{satz}
-\begin{beweis}
-Aus Lemma \ref{Lemma 2.1} und Satz \ref{Satz 2.4} folgt: \(\lambda_{d}\) ist ein
-Pr\"ama\ss \ auf \(\fr:=\cf_{d}\); es ist \(\sigma(\fr)=\fb_{d}\).
-
-Aus Satz \ref{Satz 2.5} folgt: \(\lambda_{d}\) kann zu einem Ma\ss \ auf 
-\(\fb_{d}\) fortgesetzt werden.
-
-Sei \(\nu\) ein weiteres Ma\ss \ auf \(\fb_{d}\) mit: 
-\(\nu(A)=\lambda_{d}(A)\,\forall A\in\cf_{d}\). \(\ce:=\ci_{d}\). Dann:
-\(\sigma(\ce)\overset{\ref{Satz 1.4}}{=}\fb_{d}\).
-\begin{enumerate}
-\item \(E,F\in\ce\overset{\ref{Lemma 2.1}}{\implies}E\cap F\in\ce\)
-\item \(E_{n}:=(-n,n]^{d}\)
-
-Klar: 
-\begin{align*}
-\bigcup E_{n}&=\mdr^{d}\\
-\lambda_{d}(E_{n})&=(2n)^{d}<\infty
-\end{align*}
-\end{enumerate}
-Klar: \(\nu(E)=\lambda_{d}(E)\,\forall E\in\ce\). Mit Satz \ref{Satz 2.6} folgt
-dann: \(\nu=\lambda_{d}\) auf \(\fb_{d}\).
-\end{beweis}
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
+  \textbf{Name} & \textbf{Symbol} & \textbf{$:=$ Definition} & \textbf{in Worten/Kommentar} \\ 
+  \hline
+	Ring  & $\varnothing \neq \mathfrak{R} \subseteq \mathcal{P}(X) $ & 
+	\begin{enumerate}
+	\item \(\varnothing\in\mathfrak{R}\)
+	\item \(A,B\in\mathfrak{R} \implies A\cup B,\,B\setminus A\in\mathfrak{R}\)
+	\end{enumerate} & Mengensystem, das unter Vereinigung und Differenz abg. ist\\
+  \hline
+  Elementarvo- lumen
+  	& $\lambda_{d}: \ci_{d} → [0,\infty)$ 
+	& $\begin{cases}0&\text{falls }I=\varnothing\\(
+	  \sum_{i\le d} (b_{i}-a_{i})&\text{falls }I\neq\varnothing
+	  \end{cases}$ mit $a,b \in \mdr^d, I=(a,b] \in \ci_{d}$ 
+	& Normales Volumen in $\mdr$ \\
+  \hline
+  Menge der Figuren
+  	& $\cf_d$ 
+  	& $$\left\{\bigcup_{I_{j}\in I} I_{j} \right\} \text{ mit } I \subseteq \ci_{d}, |I| \in \mdn$$ 
+  	& \\
+  \hline
+  	& $\lambda_{d}:\cf_{d}\to [0,\infty)$ 
+  	& $$\sum_{j=1}^{n}{\lambda_{d}(I_{j})}$$
+  		\newline mit $\{I_{1},\ldots,I_{n}\}\subseteq\ci_{d}$ 
+  		\newline und  $I_j$ disjunkt
+  	& Fortsetzung von $\lambda_{d}$ von $\ci_{d}$ nach $\cf_d$   \\
+  \hline Prämaß
+  	& $\mu:\fr\to[0,\infty]$ 
+  	& 
+		\begin{enumerate}
+		\item \(\mu(\varnothing)=0\)
+		\item \(\mu\left(\bigcup{A_{j}}\right)=\sum{\mu(A_{j})}\) 
+			\newline wenn $A_{j}$ disj. Folge in \(\fr\)
+			\newline und \(\bigcup{A_{j}}\in\fr\)
+		\end{enumerate}
+  	& \(\lambda_{d}:\cf_{d}\to[0,\infty]\) ist ein Pr\"ama\ss .\\
+  \hline \textbf{Lebesguemaß} \newline (auch L-Ma\ss)
+  	& $\lambda_{d}:\fb_{d}\to[0,\infty]$ 
+  	& $ $ 
+  	& Fortsetzung von \(\lambda_{d}:\cf_{d}\to[0,\infty]\) auf
+\(\fb_{d}\). \newline ist Maß \newline ist eindeutig\\
+  \hline
+  	& $ $ 
+  	& $ $ 
+  	& \\
+  \hline
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 \begin{bemerkung}
 Sei \(X\in\fb_{d}\). Aus 1.6 folgt: \(\fb(X)=\{A\in\fb_{d}\mid A\subseteq X\}\).
