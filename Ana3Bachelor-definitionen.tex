@@ -7,6 +7,7 @@
 
 \newunicodechar{×}{\times}
 \newunicodechar{∀}{\forall}
+\newunicodechar{∃}{\exists}
 \newunicodechar{∅}{\varnothing}
 \newunicodechar{∩}{\cap}
 \newunicodechar{α}{\alpha}
@@ -66,6 +67,8 @@ beteiligen. Auf Wunsch ist auch ein Zugang über \emph{Subversion} möglich.
 \label{Kapitel 0}
 \textbf{Symbole in diesem Dokument:}
 
+(nach Reihenfolge der ersten Verwendung)
+
 Kapitel 0: 
 
 $X,Y,Z$ Mengen ($\ne\varnothing$) \\
@@ -75,16 +78,29 @@ $A \subseteq X, B \subseteq Y, C \subseteq Z $
 
 Kapitel 1:
 
-Sei \(d\in\MdN\). (Dimension der betrachteten Intervalle)
+Sei \(d\in\MdN\). (Dimension der betrachteten Intervalle)\\
 $I_1,\ldots,I_d$ Intervalle in $\mdr$\\
 $a=(a_1,\ldots,a_d), b=(b_1,\ldots,b_d)\in\mdr^d$\\
 
 $\fa:$ $\sigma$-Algebra auf $X$\\
-$\mu:\fa\to[0,+\infty]$ eine Abbildung.\\
+$\mu:\fa\to[0,+\infty]$ eine Abbildung. (i.d.R. ein Maß)\\
 
 Kapitel 2:
 
 \(\ci_{d}:=\{(a,b]\mid a,b\in\MdR^{d},\,a\leq b\}\) Menge der Halboffenen Intervalle
+
+
+Kapitel 3:
+
+Ab jetzt sei stets \(X\in\fb_{d}\). (Erinnerung: \(\fb(X)=\{A\in\fb_{d}\mid A\subseteq X\}\)) \\
+Sei $M\subseteq\imdr$. \\
+Sei $(f_n)$ eine Folge von Funktionen $f_n:X\to\imdr$.\\
+
+
+Kapitel 4:
+
+In diesem Paragraphen sei $\varnothing\ne X\in\fb_d$. Wir schreiben außerdem $\lambda$ statt $\lambda_d$.
+
 
 \newpage
 \textbf{Schreibweisen / Bekanntes:}
@@ -107,6 +123,8 @@ Kapitel 2:
   offenes Intervall & $ $ & $ $ & todo… \\
   \hline
   geschlossen & $ $ & $ $ & todo…\\
+  \hline
+  äbgeschlossen & $ $ & $ $ & todo…\\
   \hline
   & $I_1 × I_2$ & $ $ & todo… \\
 
@@ -170,8 +188,6 @@ Kapitel 2:
   & „Spur von $\fm$ in $Y$“ \\
   \hline
   &$+\infty$& & Definition trivial und intuitiv, aber lang. Daher hier nicht aufgeführt. \\
-  \hline
-  &$-\infty$& & analog $+\infty$ \\
   \hline
   Maß&&
 \begin{enumerate}
@@ -256,1239 +272,235 @@ Beachte: \(\ci_{d}\subseteq\cf_{d}\subseteq\fb_{d}\overset{1.4}{\implies}\fb_{d}
   	& Fortsetzung von \(\lambda_{d}:\cf_{d}\to[0,\infty]\) auf
 \(\fb_{d}\). \newline ist Maß \newline ist eindeutig\\
   \hline
+  	& $x+B$ 
+  	& $$x+B:=\{x+b\mid b\in B\}$$ mit $x\in\mdr^d, B\subseteq\mdr^d$
+  	& \\
+  	
+  \hline Auswahlaxiom
+  	& 
+  	\multicolumn{3}{m{12cm}}{Sei $\varnothing\ne\Omega$ Indexmenge, es sei $\{X_\omega\mid \omega\in\Omega\}$ ein disjunktes System von nichtleeren Mengen $X_\omega$. Dann existiert ein $C\subseteq\bigcup_{\omega\in\Omega}X_\omega$, sodass $C$ mit jedem $X_j$ genau ein Element gemeinsam hat.
+  	}\\
+  	\\
+\end{longtable}
+
+\chapter{Messbare Funktionen}
+\label{Kapitel 3}
+
+
+Definitionen:
+
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
+  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
+  \hline messbarer Raum
+  	& $(X,\fa)$ 
+  	& wenn $\fa$ eine $\sigma$-Algebra auf $X$ ist
+  	& \\
+  \hline  $\fa$-$\fb$-messbar
+  	& Funktion $f$ heißt \textbf{$\fa$-$\fb$-messbar} 
+  	& $$\forall B\in\fb: f^{-1}(B)\in\fa$$ 
+  		 mit  $\fa$ eine $\sigma$-Algebra auf $X$
+  		\newline und $\fb$ eine $\sigma$-Algebra auf $Y$ 
+  		\newline und $f:X\to Y$
+  	& \\
+  \hline messbare Funktion
+  	& $ $ 
+  	& i.d.R.äquiv. zu Borelmessbar 
+  	& \\
+  \hline Borel-messbare Funktion
+  	& $ $ 
+  	& $\fb(X)-\fb_{k}$-messbar 
+  		\newline mit $X\in\fb_{d}$
+  		\newline und $f:\,X\to\mdr^{k}$
+  	& Erinnerung: \newline \(\fb(X)=\{A\in\fb_{d}\mid A\subseteq X\}\) \\
+  	
+  \hline
+  &$-\infty$& & analog $+\infty$ (siehe letztes Kapitel) \\
+  \hline
+  	&$\imdr$
+  	& $:=[-\infty,+\infty]$\newline$:=\mdr\cup\{-\infty,+\infty\}$
+  	& \\
+  \hline Borelsche \(\sigma\)-Algebra auf $\imdr$.
+  	& $\ifb_{1}$ 
+  	& $\{B\cup E\mid B\in\fb_{1},\,E\subseteq\{-\infty,+\infty\}\}$ 
+  	& „Borelmessbar“ kann sich auch auf dieses hier beziehen \\
+  	
+  \hline 
+  	& $-M$ 
+  	& $\{-m\mid m\in M\}$ 
+  	& \\
+  \hline  Supremum
+  	& $\sup M$ \newline mit $M\subseteq\imdr$ 
+  	& Definition trivial und intuitiv, aber lang. Daher hier nicht aufgeführt.  
+  	& Kleinste obere Grenze  (u.U. von einer unbeschräkten Menge) \\
+  \hline  Inferum
+  	& $\inf M$ 
+  	& $-\sup(-M)$ 
+  	& Größte untere Grenze (u.U. von einer unbeschräkten Menge)\\
+  \hline 
+  	& $\sup_{n\in\mdn}(f_n):$\newline$X\to\imdr$
+  	& $\sup\{f_n(x)\mid n\in\mdn\}\quad x\in X$ 
+  	& \\
+  \hline 
+  	& $\inf_{n\in\mdn}(f_n):$\newline$ X\to\imdr$ 
+  	& $\inf\{f_n(x)\mid n\in\mdn\}\quad x\in X$ 
+  	& \\
+  \hline 
+  	& $\limsup_{n\to\infty} f_n:$\newline$X\to\imdr$ 
+  	& $\inf_{j\in\mdn}(\sup_{n\ge j} f_n)$ 
+  	& \\
+  \hline 
+  	& $\liminf_{n\to\infty} f_n:$\newline$X\to\imdr$ 
+  	& $\sup_{j\in\mdn}(\inf_{n\ge j} f_n)$ 
+  	& \\
+  \hline 
+  	& $\limsup_{n\to\infty} a_n$ \newline ($a_n$ beschränkte Folge in $\mdr$) 
+  	& $\inf\{\sup\{a_n\mid n\ge j\}\mid j\in\mdn\}$ 
+  	& Erinnerung aus Ana 2\\
+  \hline
+  	& $\max_{1\le n\le N} f_n$
+  	& $\sup_{j\in\mdn} g_n$ 
+  	\newline \tiny mit $N\in\mdn$ fest
+  	\newline und $g_j:=f_j$ (für $j=1,\ldots,N$), 
+  	\newline und $g_j:=f_N$ (für $j>N$)
+  	& \\
+  \hline 
+  	& $\min_{1\le n\le N} f_n$ 
+   	& $\inf_{j\in\mdn} g_n$ 
+   		\newline \tiny $N,j, g_j$ wie oben
+  	& \\
+  \hline 
+  	&  $\lim_{n\to\infty} f_n:$\newline$  X\to\imdr$\newline \tiny wenn $f_n(x)$  für jedes $x\in\imdr$ konvergent
+  	& $ $ 
+  	& \\
+  \hline Positivteil
+  	& $f_+$ 
+  	& $\max\{f,0\}$ 
+  	& \\
+  \hline Negativteil
+  	& $f_-$ 
+  	& $\max\{-f,0\}$ 
+  	& \\
+  \hline Treppenfunktion \newline Einfache Funktion 
+  	& 
+  	& $f:X\to\mdr$ ist messbar 
+  	  \newline und $f(X)$ ist endlich 
+  	& \\
+  \hline Normalform
+  	& Normalform von $f$ 
+  	& $f=\sum_{j=1}^m y_j \mathds{1}_{A_j}$
+  		\tiny \newline mit $f$ einfach
+  		\newline $f(X)=\{y_1,\ldots,y_m\}$ mit $y_i\ne y_j$ für $i\ne j$
+  		\newline $A_j:=f^{-1}(\{y_j\})$ für $j=1,\ldots,m$ 
+  	& Außerdem: $A_1,\ldots,A_m\in\fb(X)$ und $X=\bigcup_{j=1}^m A_j$ disjunkte Vereinigung\\
+  \hline zulässig
+  	& $(f_n)$ heißt zulässig für $f$
+  	&  $f_n(x)\stackrel{n\to\infty}{\to}f(x)$ ($\forall x\in X$)
+  		\tiny \newline mit $0\le f_n\le f_{n+1}$ auf $X$ ($\forall n\in\mdn$) 
+  		\newline $f:X\to\imdr$ messbar
+  		\newline $f\ge 0$ auf $X$
+  		\newline $(f_n)$ Folge einfacher Funktionen $f_n:X\to[0,\infty)$
+  	& \\
+\end{longtable}
+
+
+\chapter{Konstruktion des Lebesgueintegrals}
+\label{Kapitel 4}
+
+
+Definitionen:
+
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
+  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
+  \hline Lebesgueintegral \newline (Funktion)
+  	& $$\int_X f(x)\text{ d}x$$ 
+  	& $$\sum_{j=1}^m y_j\lambda(A_j)$$ \newline \tiny mit $f:X\to [0,\infty)$
+  	& \\
+  \hline  Lebesgueintegral \newline (Funktionsfolge)
+  	& $$\int_X f(x)\text{ d}x$$ 
+  	& $$\lim_{n\to\infty}\int_X f_n(x)\text{ d}x$$ \newline \tiny mit $f:X\to[0,\infty]$ messbar \newline und $(f_n)$ eine für $f$ zulässige Folge 
+  	& \\
+  \hline 
+  	& $M(f)$ 
+  	& $$\{\int_X g\text{ d}x\mid g:X\to[0,\infty) \text{ einfach und }g\le f\text{ auf }X\}$$\newline \tiny \newline  mit $f:X\to[0,\infty]$ messbar
+  	& \\
+  \hline 
+  	& $L$ 
+  	& $$\lim_{n\to\infty}\int_X f_n\text{ d}x=\sup M(f)$$ \tiny 
+  	\newline mit $f:X\to[0,\infty]$ messbar
+  	\newline und $(f_n)$ zulässig für $f$
+  	& \\
+  \hline (Lebesgue-) \textbf{Integral} von $f$ (über $X$)
+  	& $$\int_X f(x) \text{ d}x$$
+  	& $$\int_X f_+(x) \text{ d}x-\int_X f_-(x) \text{ d}x$$
+  		\tiny \newline mit $f:X\to\imdr$ messbar
+  		\newline und $\int_X f_+(x) \text{ d}x<\infty$
+  		\newline und $\int_X f_-(x) \text{ d}x<\infty$
+  	& \\
+  \hline integrierbar
+  	& $ $ 
+  	& $$\int_X f(x) \text{ d}x<\infty$$ 
+  		\newline mit $f:X\to[0,\infty]$ messbar
+  	& \\
+  \hline 
+  	& $\fl^1(X)$ 
+  	& $\{f: X \to \mdr \mid f$ ist messbar und $\int_X \lvert f \rvert \text{ d}x < \infty\}$ 
+  	& \\
+\end{longtable}
+
+
+\chapter{Nullmengen}
+\label{Kapitel 5}
+
+
+Definitionen:
+
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
+  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
+  \hline (Borel-) Nullmenge
+  	& $N$ ist Nullmenge
+  	& $\lambda(N)=0$ 
+  	\newline und $N\in\fb_d$
+  	& Menge, deren integral Null ist \\
+  \hline für fast alle / \newline fast überall
+  	& [Eigenschaft] (E) gilt ffa $x\in X$ 
+  	& $∃ N\subseteq X$ sodass $(E)$ für alle $x\in X\setminus N$ gilt. 
+  	& kurz „ffa“ \ „fü“ \\
+  \hline Konvergenz ffa
+  	& Folge $(f_n)$ konvergiert fast überall (auf $X$)  
+  	& Nullmenge $N\subseteq X$ existiert, sodass für alle  $x\in X\setminus N$ $\left(f_n(x)\right)$ in $\imdr$ konvergiert.
+  	& \\
+  \hline Konvergenz ffa gegen 
+  	& $f_n\to f$ fast überall \tiny \newline für $f:X\to\imdr$
+  	& Nullmenge $N\subseteq X$ existiert mit: $f_n(x)\to f(x) \forall x\in X\setminus N$
+  	& „$(f_n)$ konvergiert fast überall (auf $X$) gegen $f$“ \\
+\end{longtable}
+
+
+\chapter{Der Konvergenzsatz von Lebesgue}
+\label{Kapitel 6}
+
+
+
+Definitionen:
+
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
+  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
+  \hline 
   	& $ $ 
   	& $ $ 
   	& \\
-  \hline
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+  \hline 
   	& $ $ 
   	& $ $ 
   	& \\
 \end{longtable}
 
-\begin{definition}
-Sei $x\in\mdr^d, B\subseteq\mdr^d$. Definiere:
-\[x+B:=\{x+b\mid b\in B\}\]
-\end{definition}
 
-\begin{beispiel}
-Ist $I\in\ci_d$, so gilt $x+I\in\ci_d$ und $\lambda_d(x+I)=\lambda_d(I)$.
-\end{beispiel}
 
-\begin{satz}
-\label{Satz 2.8}
-Sei $x\in\mdr^d, \fa:=\{B\in\fb_d:x+B\in\fb_d\}$ und $\mu:\fa\to[0,\infty]$ sei definiert durch $\mu(A):=\lambda_d(x+A)$. Dann gilt:
-\begin{enumerate}
-\item $(\mdr^d,\fa,\mu)$ ist ein Maßraum.
-\item Es ist $\fa=\fb_d$ und $\mu=\lambda_d$ auf $\fb_d$. D.h. für alle $A\in\fb_d$ ist $x+A\in\fb_d$ und $\lambda_d(x+A)=\lambda_d(A)$ (Translationsinvarianz des Lebesgue-Maßes).
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Leichte Übung!
-\item Es ist klar, dass $\fb_d\supseteq\fa$. Nach dem Beispiel von oben gilt:
-\[\ci_d\subseteq\fa\subseteq\fb_d=\sigma(\ci_d)\subseteq\sigma(\fa)=\fa\]
-Setze $\ce:=\ci_d$, dann ist $\sigma(\ce)=\fb_d$ und es gilt nach dem Beispiel von oben:
-\[\forall E\in\ce:\mu(E)=\lambda_d(E)\]
-$\ce$ hat die Eigenschaften (1) und (2) aus Satz \ref{Satz 2.6}, daraus folgt dann, dass $\mu=\lambda_d$ auf $\fb_d$ ist.
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}
-\label{Satz 2.9}
-Sei $\mu$ ein Maß auf $\fb_d$ mit der Eigenschaft:
-\[\forall x\in\mdr^d, A\in\fb_d:\mu(A)=\mu(x+A)\]
-Weiter sei $c:=\mu((0,1]^d)<\infty$. Dann gilt:
-\[\mu=c\cdot\lambda_d\]
-\end{satz}
-
-\begin{satz}[Regularität des Lebesgue-Maßes]
-\label{Satz 2.10}
-Sei $A \in\fb_d$, dann gilt:
-\begin{enumerate}
-\item
-$\lambda_d(A)=\inf\left\{\lambda_d(G)\mid G\subseteq\mdr^d\text{ offen und }A \subseteq G\right\}\\
- =\inf\left\{\lambda_d(V)\mid V=\bigcup_{j=1}^\infty I_j, I_j\subseteq\mdr^d\text{ offenes Intervall }, A\subseteq V\right\}$
-\item $\lambda_d(A)=\sup\{\lambda_d(K)\mid K\subseteq\mdr^d\text{ kompakt }, K\subseteq A\}$
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Ohne Beweis.
-\item Setze $\beta:=\sup\{\lambda_d(K)\mid K\subseteq\mdr^d\text{ kompakt }, K\subseteq A\}$. Sei $K$ kompakt und $K\subseteq A$, dann gilt $\lambda_d(K)\le\lambda_d(A)$, also ist auch $\beta\le\lambda_d(A)$.
-
-\textbf{Fall 1:} Sei $A$ zusätzlich beschränkt.\\
-Sei $\ep>0$. Es existiert ein $r>0$, sodass $A\subseteq B:=\overline{U_r(0)}\subseteq[-r,r]^d$ ist, dann gilt:
-\[\lambda_d(A)\le\lambda_d([-r,r]^d)=(2r)^d<\infty\]
-Aus (1) folgt, dass eine offene Menge $G\supseteq B\setminus A$ existiert mit $\lambda_d(G)\le\lambda_d(B\setminus A)+\ep$. Dann gilt nach \ref{Satz 1.7}:
-\[\lambda_d(B\setminus A)=\lambda_d(B)-\lambda_d(A)\]
-Setze nun $K:=B\setminus G=B\cap G^c$, dann ist $K$ kompakt und $K\subseteq B\setminus(B\setminus A)=A$. Da $B\subseteq G\cup K$ ist, gilt:
-\[\lambda_d(B)\le\lambda_d(G\cup K)\le \lambda_d(B)-\lambda_d(A)+\ep+\lambda_d(K)\]
-Woraus folgt:
-\[\lambda_d(A)\le\lambda_d(K)+\ep\]
-
-\textbf{Fall 2:} Sei $A\in\fb_d$ beliebig.\\
-Setze $A_n:=A\cap\overline{U_n(0)}$. Dann ist $A_n$ für alle $n\in\mdn$ beschränkt, $A_n\subseteq A_{n+1}$ und $A=\bigcup_{n\in\mdn} A_n$. Nach \ref{Satz 1.7} gilt:
-\[\lambda_d(A)=\lim\lambda_d(A_n)\]
-Aus Fall 1 folgt, dass für alle $n\in\mdn$ ein kompaktes $K_n\subseteq A_n$ mit $\lambda_d(A_n)\le\lambda_d(K_n)+\frac1n$ existiert. Dann gilt:
-\[\lambda_d(A_n)\le\lambda_d(K_n)+\frac1n\le\lambda_d(A)+\frac1n\]
-Also auch:
-\[\lambda_d(A)=\lim\lambda(K_n)\le\beta\]
-\end{enumerate}
-\end{beweis}
-
-\textbf{Auswahlaxiom:}\\
-Sei $\varnothing\ne\Omega$ Indexmenge, es sei $\{X_\omega\mid \omega\in\Omega\}$ ein disjunktes System von nichtleeren Mengen $X_\omega$. Dann existiert ein $C\subseteq\bigcup_{\omega\in\Omega}X_\omega$, sodass $C$ mit jedem $X_j$ genau ein Element gemeinsam hat.
-
-\begin{satz}[Satz von Vitali]
-\label{Satz 2.11}
-Es existiert ein $C\subseteq\mdr^d$ sodass $C\not\in\fb_d$.
-\end{satz}
-
-\begin{beweis}
-Wir definieren auf $[0,1]^d$ eine Äquivalenzrelation $\sim$, durch:
-\begin{align*}
-\forall x,y\in[0,1]^d: x \sim y\iff x-y\in\mdq^d\\
-\forall x\in[0,1]^d:[x]:=\{y\in[0,1]^d\mid x\sim y\}
-\end{align*}
-Nach dem Auswahlaxiom existiert ein $C\subseteq[0,1]^d$, sodass $C$ mit jedem $[x]$ genau ein Element gemeinsam hat.
-Es ist $\mdq^d\cap[-1,1]^d=\{q_1,q_2,\ldots\}$ mit $q_i\ne q_j$ für $(i\ne j)$. Dann gilt:
-\begin{align*}
-\tag{1} \bigcup_{n=1}^\infty(q_n+C)\subseteq[-1,2]^d\\
-\tag{2} [0,1]^d\subseteq\bigcup_{n=1}^\infty(q_n+C)
-\end{align*}
-\begin{beweis}
-Sei $x\in[0,1]^d$. Wähle $y\in C$ mit $y\in[x]$, dann ist $x\sim y$, also $x-y\in\mdq^d\cap[-1,1]^d$. D.h.:
-\[\exists n\in\mdn: x-y=q_n\implies x=q_n+y\in q_n+C\] 
-\end{beweis}
-Außerdem ist $\{q_n+C\mid n\in\mdn\}$ disjunkt.
-\begin{beweis}
-Sei $z\in(q_n+C)\cap(q_m+C)$, dann existieren $a,b\in\mdq^d$, sodass gilt:
-\begin{align*}
-(q_n+a=z=q_m+b) &\implies (b-a=q_m-q_n\in\mdq^d)\\
-&\implies (a\sim b) \implies([a]=[b])\\
-&\implies (a=b)\implies (q_n=q_m)
-\end{align*}
-\end{beweis}
-\textbf{Annahme:} $C\in\fb_d$, dann gilt nach (1):
-\begin{align*}
-3^d&=\lambda_d([-2,1]^d)\\
-&\ge\lambda_d(\bigcup(q_n+C))\\
-&=\sum \lambda_d(q_n+C)\\
-&=\sum \lambda_d(C)
-\end{align*}
-Also ist $\lambda_d(C)=0$. Damit folgt aus (2):
-\begin{align*}
-1&=\lambda_d([0,1]^d)\\
-&\le \lambda_d(\bigcup (q_n+C))\\
-&=\sum \lambda_d(C)\\
-&=0
-\end{align*}
-\end{beweis}
-
-\chapter{Messbare Funktionen}
-\label{Kapitel 3}
-
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-Definitionen:
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
-In diesem Paragraphen seien $\varnothing\ne X,Y,Z$ Mengen.
-
-\begin{definition}
-\index{messbar!Raum}\index{Raum!messbarer}
-Ist $\fa$ eine $\sigma$-Algebra auf $X$, so heißt $(X,\fa)$ ein \textbf{messbarer Raum}.
-\end{definition}
-
-\begin{definition}
-\index{$\fa$-$\fb$-messbar}
-\index{messbar!Funktion}
-Sei $\fa$ eine $\sigma$-Algebra auf $X$, $\fb$ eine $\sigma$-Algebra auf $Y$ und $f:X\to Y$ eine Funktion. $f$ heißt genau dann \textbf{$\fa$-$\fb$-messbar}, wenn gilt:
-\[\forall B\in\fb: f^{-1}(B)\in\fa\]
-\end{definition}
-
-\begin{bemerkung}
-Seien die Bezeichnungen wie in obiger Definition, dann gilt:
-\begin{enumerate}
-\item $f$ sei $\fa$-$\fb$-messbar, $\fa'$ eine weitere $\sigma$-Algebra auf $X$ mit $\fa\subseteq\fa'$ und $\fb'$ sei eine $\sigma$-Algebra auf $Y$ mit $\fb'\subseteq\fb$.\\
-Dann ist $f$ $\fa'$-$\fb'$-messbar.
-\item Sei $X_0\in\fa$, dann gilt $\fa_{X_0}\subseteq\fa$ nach \ref{Satz 1.5}. Nun sei $f:X\to Y$ $\fa$-$\fb$-messbar, dann ist $f_{\mid X_0}:X_0\to Y$ $\fa_{X_0}$-$\fb$-messbar.
-\end{enumerate}
-\end{bemerkung}
-
-\begin{beispiel}
-\begin{enumerate}
-\item Sei $\fa$ eine $\sigma$-Algebra auf $X$ und $A\subseteq X$. $\mathds{1}_A:X\to\mdr$ ist genau dann $\fa$-$\fb_1$-messbar, wenn $A\in\fa$ ist.
-\item Sei $X=\mdr^d$. Ist $A\in\fb_d$, so ist $\mathds{1}_A$ $\fb_d$-$\fb_1$-messbar.
-\item Ist $C$ wie in \ref{Satz 2.11}, so ist $\mathds{1}_C$ nicht $\fb_d$-$\fb_1$-messbar.
-\item Es sei $f:X\to Y$ eine Funktion und $\fb$ ($\fa$) eine $\sigma$-Algebra auf $Y$ ($X$), dann ist $f$ $\cp(X)$-$\fb$-messbar ($\fa$-$\{Y,\varnothing\}$-messbar).
-\end{enumerate}
-\end{beispiel}
-
-\begin{satz}
-\label{Satz 3.1}
-Seien \(\fa,\,\fb,\,\fc\) \(\sigma\)-Algebren auf \(X,\,Y\) bzw. \(Z\). Weiter seien \(f:\,X\to Y\) und \(g:\,Y\to Z\)
-Funktionen.
-\begin{enumerate}
-\item Ist \(f\) \(\fa-\fb-\)messbar und ist \(g\) \(\fb-\fc-\)messbar, so ist \(g\circ f:\,X\to Z\) \(\fa-\fc-\)messbar.
-\item Sei \(\varnothing\neq\ce\subseteq\cp(Y)\) und \(\sigma(\ce)=\fb\). Dann:
-\begin{center}
-\(f\) ist \(\fa-\fb-\)messbar, genau dann, wenn gilt: \(\forall E\in\ce:\,f^{-1}(E)\in\fa\)
-\end{center}
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Sei \(C\in\fc\); \(g\) ist messbar, daraus folgt \(g^{-1}(C)\in\fb\);
-\(f\) ist messbar, daraus folgt \(f^{-1}(g^{-1}(C))=(g\circ f)^{-1}(C)\in\fa\)
-\item \begin{itemize}
-\item[\(\Rightarrow\)] \checkmark
-\item[\(\Leftarrow\)] \(\fd:=\{B\subseteq Y\mid f^{-1}(B)\in\fa\}\)
-\"Ubung: \(\fd\) ist eine \(\sigma\)-Algebra auf \(Y\).
-
-Aus der Voraussetzung folgt: \(\ce\subseteq\fd\).
-Dann: \(\fb=\sigma(\ce)\subseteq\fd\). Ist \(B\in\fb\), so ist \(B\in\fd\), also
-\(f^{-1}(B)\in\fa\).
-\end{itemize}
-\end{enumerate}
-\end{beweis}
-
-\begin{definition}
-\index{messbar!Borel}\index{messbar}
-Sei \(X\in\fb_{d}\). Ist \(f:\,X\to\mdr^{k}\) \(\fb(X)-\fb_{k}-\)messbar, so hei\ss t \(f\) \textbf{(Borel-)messbar}.
-\end{definition}
-Ab jetzt sei stets \(X\in\fb_{d}\). (Erinnerung: \(\fb(X)=\{A\in\fb_{d}\mid A\subseteq X\}\))
-
-\begin{satz}
-\label{Satz 3.2}
-Seien \(f,\,g:\,X\to\mdr^{k}\) und \(\alpha,\beta\in\mdr\).
-\begin{enumerate}
-\item Ist \(f\) auf \(X\) stetig, so ist \(f\) messbar.
-\item Ist \(f=(f_{1},\ldots,f_{k})\), so gilt: \(f\) ist messbar \(\Leftrightarrow\) alle \(f_{j}\) sind messbar.
-\item Sind \(f\) und \(g\) messbar, so ist \(\alpha f+\beta g\) messbar.
-\item Sei \(k=1\) und \(f\) und \(g\) seien messbar. Dann:
-\begin{enumerate}
-\item \(fg\) ist messbar
-\item Ist \(f(x)\neq0\forall x\in X\), so ist \(\frac{1}{f}\) messbar
-\item \(\{x\in X\mid f(x)\geq g(x)\}\in\fb(X)\)
-\end{enumerate}
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Sei \(G\in\co(\mdr^{k})\). Mit \(f\) stetig folgt: \(f^{-1}(G)\in\co(X)\in\fb(X)\)
-
-\(\sigma(\co(\mdr^{k}))=\fb_{k}\). Die Behauptung folgt aus \ref{Satz 3.1}.(2).
-\item \begin{itemize}
-\item[\(\Leftarrow:\)] Sei \(I=(a,b]=\prod_{j=1}^{k}{(a_{j},b_{j}]}\in I_{k}\quad (a=(a_{1},\ldots,a_{k}),\,b=(b_{1},\ldots,b_{k}),\,a\leq b)\)
-
-Dann: \(f^{-1}(I)=\bigcap_{j=1}^{k}{\underbrace{f_{j}^{-1}(\underbrace{(a_{j},b_{j}]}_{\in\fb_{1}}}_{\in\fb(X)}}\in\fb(X)\)
-
-Aus \(\sigma(I_{k})=\fb_{k}\) folgt mit \ref{Satz 3.1}.(2): \(f\) ist messbar.
-\item[\(\Rightarrow:\)] F\"ur \(j=1,...,k\) sei \(p_{j}:\mdr^{k}\to\mdr\) definiert durch 
-\(p_{j}(x_{1},\ldots,x_{k}):=x_{j}\)
-
-\(p_{j}\) ist stetig, also messbar (nach (1)). Es ist \(f_{j}=p_{j}\circ f\). Mit \ref{Satz 3.1}.(1) folgt: \(f_{j}\) ist
-messbar.
-\end{itemize}
-\item \(h:=(f,g):\,X\to\mdr^{2k}\); aus (2): \(h\) ist messbar.
-
-\(\vp(x,y):=\alpha x+\beta y\,(x,y\in\mdr^{k})\)
-
-\(\vp\) ist stetig, also messbar (nach (1)). Es ist \(\alpha f+\beta g=\vp\circ h\). Mit \ref{Satz 3.1}.(1) folgt: 
-\(\alpha f+\beta g\) ist messbar.
-\item 
-\begin{enumerate}
-\item \(h:=(f,g):\,X\to\mdr^{2k}\) ist messbar (nach (2)); \(\vp(x,y):=xy\), \(\vp\) ist stetig, also messbar.
-
-Es ist \(fg=\vp\circ h\). Mit \ref{Satz 3.1}.(1) folgt: \(fg\) ist messbar.
-\item \(\vp(x):=\frac{1}{x}\), \(\vp\) ist stetig auf \(\mdr\setminus\{0\}\), also messbar.
-
-\(\frac{1}{f}=\vp\circ f\). Mit \ref{Satz 3.1}.(1) folgt: \(\frac{1}{f}\) ist messbar.
-\item \(A:=\{x\in X\mid f(x)\geq g(x)\}=\{x\in X\mid f(x)-g(x)\in[0,\infty)\}=\underbrace{(f-g)}_{\text{messbar nach (3)}}^{-1}(\overbrace{[0,\infty)}^{\in\fb_{1}})\in\fb(X)\)
-\end{enumerate}
-\end{enumerate}
-\end{beweis}
-
-\begin{folgerungen}
-\label{Folgerung 3.3}
-\begin{enumerate}
-\item Seien \(A,\,B\in\fb(X),\,A\cap B=\varnothing\) und \(X=A\cup B\). Weiter seien \(f:A\to\mdr^{k}\) und
-\(g:B\to\mdr^{k}\) messbar. Dann ist \(h:X\to\mdr^{k}\), definiert durch 
-\[
-h(x):=\begin{cases}f(x)&x\in A\\g(x)&x\in B\end{cases},
-\]
-messbar.
-\item Ist \(f:X\to\mdr^{k}\) messbar und \(g(x):=\lVert f(x)\rVert\,(x\in X)\), so ist \(g\) messbar.
-\end{enumerate}
-\end{folgerungen}
-
-\begin{beweis}
-\begin{enumerate}
-\item Sei \(C\in\fb_{k}\). Dann:
-\[
-h^{-1}(C)=\underbrace{f^{-1}(C)}_{\in\fb(A)\subseteq\fb(X)}\cup\underbrace{g^{-1}(C)}_{\in\fb(B)\subseteq\fb(X)}\in\fb(X)
-\]
-\item Definiere \(\vp(z)=\lVert z\rVert\quad(z\in\mdr^{k})\); \(\vp\) ist
-stetig, also messbar.
-
-Es ist \(g=\vp\circ f\). Mit \ref{Satz 3.1} folgt: \(g\) ist messbar.
-\end{enumerate}
-\end{beweis}
-
-\begin{beispiel}
-\(X=\mdr^{2},\,f(x,y):=\begin{cases}\frac{\sin(y)}{x}&x\neq 0\\0&x=0\end{cases}\)
-
-f\"ur \(x\neq 0:\,f(x,x)=\frac{\sin(X)}{x}\overset{x\to 0}{\to}1\neq 0=f(0,0)\), daraus folgt: \(f\) ist nicht stetig.
-
-\(A:=\{(x,y)\in\mdr^{2}\mid x=0\},\,B:=\{(x,y)\in\mdr^{2}\mid x\neq 0\},\,X=A\cup B,\,A\cap B=\varnothing\). \(A\) ist
-abgeschlossen, das hei\ss t: \(A\in\fb_{2},\,B=A^{C}\in\fb_{2}\)
-
-\begin{align*}
-f_{1}(x,y)&:=0\quad((x,y)\in A)\\
-f_{2}(x,y)&:=\frac{\sin(y)}{x}\quad((x,y)\in B)
-\end{align*}
-
-\(f_{1}\) ist stetig auf \(A\), \(f_{2}\) ist stetig auf \(B\). Also: \(f_{1},\,f_{2}\) ist messbar; mit \ref{Folgerung 3.3}.(1) folgt: \(f\) ist messbar.
-\end{beispiel}
-
-\textbf{Ein neues Symbol kommt hinzu:} \(-\infty\){
-
-\(\imdr:=[-\infty,+\infty]:=\mdr\cup\{-\infty,+\infty\}\)
-
-In \(\imdr\) gelten folgende Regeln, wobei \(a\in\mdr\):
-\begin{enumerate}
-\item \(-\infty<a<+\infty\)
-\item \(\pm\infty+(\pm\infty)=\pm\infty\)
-\item \(\pm\infty+a:=a+(\pm\infty):=\pm\infty\)
-\item \(a\cdot(\pm\infty):=(\pm\infty)\cdot a=\begin{cases}\pm\infty&a>0\\
-    0&a=0\\\mp\infty&a<0\end{cases}\)
-\item \(\frac{a}{\pm\infty}:=0\)
-\end{enumerate}
-}
-
-\begin{definition}
-\begin{enumerate}
-\item Sei \((x_{n})\) eine Folge in \(\imdr\). \(x_{n}\rightarrow+\infty:\Leftrightarrow\forall c\in\mdr\exists n_{c}\in\mdn:x_{n}\geq c\forall n\geq n_{c}\)\\
-Analog f\"ur \(-\infty\).
-\item Seien \(f,g: X\to\imdr\). Dann:
-\begin{align*}
-    \{f\leq g\}&:=\{x\in X\mid f(x)\leq g(x)\}\\
-    \{f\geq g\}&:=\{x\in X\mid f(x)\geq g(x)\}\\
-    \{f\neq g\}&:=\{x\in X\mid f(x)\neq g(x)\}\\
-    \{f<g\}&:=\{x\in X\mid f(x)<g(x)\}\\
-    \{f>g\}&:=\{x\in X\mid f(x)>g(x)\}
-\end{align*}
-\item Sei \(a\in\imdr\) und \(f:\,X\to\imdr\). Dann:
-\begin{align*}
-    \{f\leq a\}&:=\{x\in X\mid f(x)\leq a\}\\
-    \{f\geq a\}&:=\{x\in X\mid f(x)\geq a\}\\
-    \{f\neq a\}&:=\{x\in X\mid f(x)\neq a\}\\
-    \{f<a\}&:=\{x\in X\mid f(x)<a\}\\
-    \{f>a\}&:=\{x\in X\mid f(x)>a\}
-\end{align*}
-\end{enumerate}
-\end{definition}
-
-\begin{definition}
-\index{Borel!$\sigma$-Algebra}\index{messbar}
-\(\ifb_{1}:=\{B\cup E\mid B\in\fb_{1},\,E\subseteq\{-\infty,+\infty\}\}\). Dann: \(\fb_{1}\subseteq\ifb_{1}\)\\
-Übung: \(\ifb_{1}\) ist eine \(\sigma\)-Algebra auf \(\imdr\).\\
-\(\ifb_{1}\) hei\ss t \textbf{Borelsche \(\sigma\)-Algebra} auf \(\imdr\).
-Sei \(f:\,X\to\imdr\). \(f\) hei\ss t \textbf{(Borel-)messbar} (mb) \(:\Leftrightarrow\,f\) ist \(\fb(X)-\ifb_{1}-\) messbar.
-\end{definition}
-
-\begin{beispiel}
-\(f(x):=+\infty\quad(x\in X)\), also: \(f:\,X\to\imdr\)
-
-Sei \(B\in\overline{\fb}_{1},\,A:=f^{-1}(B)=\{x\in X\mid f(x)\in B\}\)
-\begin{itemize}
-\item[Fall 1:] \(+\infty\not\in B\), dann: \(A=\varnothing\in\fb(X)\)
-\item[Fall 2:] \(+\infty\in B\), dann: \(A=X\in\fb(X)\)
-\end{itemize}
-\(f\) ist messbar.
-\end{beispiel}
-
-\begin{satz}
-\label{Satz 3.4}
-\begin{enumerate}
-\item Definiere die Mengen:
-\begin{align*}
-\ce_1&:=\{[-\infty,a]\mid a\in\mdq\} & \ce_2&:=\{[-\infty,a)\mid a\in\mdq\}\\
-\ce_3&:=\{(a,\infty]\mid a\in\mdq\} & \ce_4&:=\{[a,\infty]\mid a\in\mdq\}
-\end{align*}
-Dann gilt:
-\[\overline{\fb_1}=\sigma(\ce_j)\quad \text{ für }j\in\{1,2,3,4\}\]
-\item Für $f:X\to\imdr$ sind die folgenden Aussagen äquivalent:
-\begin{enumerate}
-\item $f$ ist messbar.
-\item $\forall a\in\mdq: \{f\le a\}\in\fb(X)$.
-\item $\forall a\in\mdq: \{f\ge a\}\in\fb(X)$.
-\item $\forall a\in\mdq: \{f< a\}\in\fb(X)$.
-\item $\forall a\in\mdq: \{f> a\}\in\fb(X)$.
-\end{enumerate}
-\item Die Äquivalenzen in (2) gelten auch für Funktionen $f:X\to\mdr$.
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-Die folgenden Beweise erfolgen exemplarisch für einen der Unterpunkte und funktionieren fast analog für die anderen.
-\begin{enumerate}
-\item Für $a\in\mdq$ gilt:
-\[[-\infty,a]^c=(a,\infty]\in\sigma(\ce_1)\]
-D.h. es gilt $\ce_3\subseteq\sigma(\ce_1)$ und damit auch $\sigma(\ce_3)\subseteq\sigma(\ce_1)$.
-\item Es gilt:
-\[\{f\le a\}=\{x\in X\mid f(x)\le a\}=f^{-1}([-\infty,a])\]
-Die Äquivalenz folgt dann aus (1) und \ref{Satz 3.1}.
-\item Die Funktion $f:X\to\imdr$ kann aufgefasst werden als Funktion $\overline{f}:X\to\imdr$. Es ist $f$ genau dann $\fb(X)$-$\fb_1$-messbar wenn $\overline{f}$ $\fb(X)$-$\overline{\fb_1}$-messbar ist. 
-\end{enumerate}
-\end{beweis}
-
-\begin{definition}
-Sei $M\subseteq\imdr$.
-\begin{enumerate}
-\item Ist $M=\varnothing$ oder $M=\{-\infty\}$, so sei 
-\[\sup M:=-\infty\]
-\item Ist $M\setminus\{-\infty\}\ne\varnothing$ und nach oben beschränkt (also insbesondere $\infty\not\in M$), so sei 
-\[\sup M:= \sup (M\setminus\{-\infty\})\]
-\item Ist $M\setminus\{-\infty\}$ nicht nach oben beschränkt oder $\infty\in M$, so sei 
-\[\sup M:=\infty\]
-\item Es sei $\inf M:=-\sup(-M)$, wobei $-M:=\{-m\mid m\in M\}$.
-\end{enumerate}
-\end{definition}
-
-\begin{definition}
-Sei $(f_n)$ eine Folge von Funktionen $f_n:X\to\imdr$.
-\begin{enumerate}
-\item Die Funktion $\sup_{n\in\mdn}(f_n):X\to\imdr$  $\left(\inf_{n\in\mdn}(f_n):X\to\imdr\right)$ ist definiert durch:
-\[(\sup_{n\in\mdn} f_n)(x):=\sup\{f_n(x)\mid n\in\mdn\}\quad x\in X\]
-\[\left((\inf_{n\in\mdn} f_n)(x):=\inf\{f_n(x)\mid n\in\mdn\}\quad x\in X\right)\]
-\item Die Funktion $\limsup_{n\to\infty} f_n:X\to\imdr$ $\left(\liminf_{n\to\infty} f_n:X\to\imdr\right)$ ist definiert durch:
-\begin{align*}
-\tag{$*$} \limsup_{n\to\infty} f_n &:= \inf_{j\in\mdn}(\sup_{n\ge j} f_n)\\
-\liminf_{n\to\infty} f_n &:= \sup_{j\in\mdn}(\inf_{n\ge j} f_n)
-\end{align*}
-\textbf{Erinnerung:} Für eine beschränkte Folge $(a_n)$ in $\mdr$ war
-\[\limsup_{n\to\infty} a_n:=\inf\{\sup\{a_n\mid n\ge j\}\mid j\in\mdn\}\]
-\item Sei $N\in\mdn$ und $g_j:=f_j$ (für $j=1,\ldots,N$), $g_j:=f_N$ (für $j>N$). Definiere:
-\begin{align*}
-\max_{1\le n\le N} f_n &:=\sup_{j\in\mdn} g_n\\
-\min_{1\le n\le N} f_n &:=\inf_{j\in\mdn} g_n
-\end{align*}
-\item Ist $f_n(x)$ für jedes $x\in\imdr$ konvergent, so ist $\lim_{n\to\infty} f_n:X\to\imdr$ definiert durch:
-\[(\lim_{n\to\infty} f_n)(x):=\lim_{n\to\infty} f_n(x)\]
-(In diesem Fall gilt $\lim_{n\to\infty} f_n = \limsup_{n\to\infty} f_n = \liminf_{n\to\infty} f_n$.)
-\end{enumerate}
-\end{definition}
-
-\begin{satz}
-\label{Satz 3.5}
-Sei $(f_n)$ eine Folge von Funktionen $f_n:X\to\imdr$ und jedes $f_n$ messbar.
-\begin{enumerate}
-\item Dann sind ebenfalls messbar:
-\begin{align*}
-&\sup_{n\in\mdn} f_n  &&\inf_{n\in\mdn} f_n &&\limsup_{n\in\mdn} f_n &&\liminf_{n\in\mdn} f_n
-\end{align*}
-\item Ist $(f_n(x))$ für jedes $x\in X$ in $\imdr$ konvergent, so ist $\lim_{n\to\infty} f_n$ messbar.
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Sei $a\in\mdq$, dann gilt (nach \ref{Satz 3.4}(2)):
-\[\{\sup_{n\in\mdn} f_n\le a\}=\bigcap_{n\in\mdn}\{f_n\le a\}\in\fb(X)\]
-Also ist $\sup_{n\in\mdn} f_n$ messbar. Analog lässt sich die Messbarkeit von $\inf_{n\in\mdn} f_n$ zeigen, der Rest folgt dann aus ($*$).
-\item Folgt aus (1) und obiger Bemerkung in der Definition.
-\end{enumerate}
-\end{beweis}
-
-\begin{beispiel}
-Sei $X=I$ ein Intervall in $\mdr$ und $f:I\to\mdr$ sei auf $I$ differenzierbar.\\
-Für $x\in I,n\in\mdn$ sei $f_n:= n(f(x-\frac1n)-f(x))$. Da $f$ stetig ist, ist auch jedes $f_n$ stetig, also insbesondere messbar und es gilt:
-\[f_n(x)=\frac{f(x-\frac1n)-f(x)}{\frac1n}\stackrel{n\to\infty}{\to}f'(x)\]
-Aus \ref{Satz 3.5}(2) folgt, dass $f'$ messbar ist. 
-\end{beispiel}
-
-\begin{definition}
-\index{Positivteil}\index{Negativteil}
-Sei $f:X\to\imdr$ eine Funktion.
-\begin{enumerate}
-\item $f_+:=\max\{f,0\}$ heißt \textbf{Positivteil} von $f$.
-\item $f_-:=\max\{-f,0\}$ heißt \textbf{Negativteil} von $f$.
-\end{enumerate}
-Es gilt $f_+,f_-\ge 0$, $f=f_+-f_-$ und $|f|=f_++f_-$.
-\end{definition}
-
-\begin{satz}
-\label{Satz 3.6}
-Seien $f,g:X\to\imdr$ und $\alpha,\beta\in\mdr$.
-\begin{enumerate}
-\item Sind $f,g$ messbar und ist $\alpha f(x)+\beta g(x)$ für jedes $x\in X$ definiert, so ist $\alpha f+\beta g$ messbar.
-\item Sind $f,g$ messbar und ist $f(x)g(x)$ für jedes $x\in X$ definiert, so ist $fg$ messbar.
-\item $f$ ist genau dann messbar, wenn $f_+$ und $f_-$ messbar sind. In diesem Fall ist auch $|f|$ messbar.
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item[(1)+(2)] Für alle $n\in\mdn, x\in X$ seien $f_n$ und $g_n$ wie folgt definiert:
-\begin{align*}
-f_n(x)&:=\max\{-n,\min\{f(x),n\}\}\\
-g_n(x)&:=\max\{-n,\min\{g(x),n\}\}
-\end{align*}
-Dann sind $f_n(x),g_n(x)\in[-n,n]$ für alle $n\in\mdn,x\in X$. Nach \ref{Satz 3.2}(3) sind also $\alpha f_n+\beta g_n$ und $f_ng_n$ messbar. Außerdem gilt:
-\begin{align*}
-\alpha f_n(x)+\beta g_n(x)&\stackrel{n\to\infty}\to \alpha f(x)+\beta g(x)\\
-f_n(x)g_n(x)&\stackrel{n\to\infty}\to f(x)g(x)
-\end{align*}
-Die Behauptung folgt aus \ref{Satz 3.5}(2).
-\item[(3)] Nach \ref{Satz 3.5}(1) sind $f_+$ und $f_-$ messbar, wenn $f$ messbar ist. Die umgekehrte Implikation folgt aus \ref{Satz 3.6}(1). Sind $f_+$ und $f_-$ messbar, so folgt ebenfalls aus \ref{Satz 3.6}(1), dass $|f|=f_++f_-$ messbar ist.
-\end{enumerate}
-\end{beweis}
-
-\begin{beispiel}
-Sei $C\subseteq\mdr^d$ wie in \ref{Satz 2.11}, also $C\not\in\fb_d$. Definiere $f:\mdr^d\to\mdr$ wie folgt:
-\[f(x):=\begin{cases} 1&,x\in C\\ -1&,x\not\in C\end{cases}\]
-Dann ist $\{f\ge 1\}=C$, also $f$ \textbf{nicht} messbar. Aber für alle $x\in\mdr^d$ ist $|f(x)|=1$, also $|f|=\mathds{1}_{\mdr^d}$ und damit messbar.
-\end{beispiel}
-
-\begin{definition}
-\index{einfach}
-\index{Treppenfunktion}
-\index{Normalform}
-$f:X\to\mdr$ sei messbar.
-\begin{enumerate}
-\item $f$ heißt \textbf{einfach} oder \textbf{Treppenfunktion}, genau dann wenn $f(X)$ endlich ist.
-\item $f$ sei einfach und $f(X)=\{y_1,\ldots,y_m\}$ mit $y_i\ne y_j$ für $i\ne j$. Sei weiter $A_j:=f^{-1}(\{y_j\})$ für $j=1,\ldots,m$. Dann sind $A_1,\ldots,A_m\in\fb(X)$ und $X=\bigcup_{j=1}^m A_j$ disjunkte Vereinigung.
-\[f=\sum_{j=1}^m y_j \mathds{1}_{A_j}\]
-heißt \textbf{Normalform} von $f$.
-\end{enumerate}
-\end{definition}
-
-\begin{beispiel}
-Sei $A\in\fb(X)$. Definiere:
-\[f:=\mathds{1}_A=2\cdot\mathds{1}_A-\mathds{1}_X+\mathds{1}_{X\setminus A}=\mathds{1}_A+0\cdot\mathds{1}_{X\setminus A}\]
-Wobei das letzte die Normalform von $f$ ist. Man sieht also, dass einfache Funktionen mehrere Darstellungen haben können.
-\end{beispiel}
-
-\begin{satz}
-\label{Satz 3.7}
-Linearkombinationen und Produkte, sowie endliche Maxima und Minima einfacher Funktionen, sind einfach.
-\end{satz}
-
-\begin{satz}
-\label{Satz 3.8}
-\index{zulässig}
-Sei $f:X\to\imdr$ messbar.
-\begin{enumerate}
-\item Ist $f\ge 0$ auf $X$, so existiert eine Folge $(f_n)$ von einfachen Funktionen $f_n:X\to[0,\infty)$, sodass $0\le f_n\le f_{n+1}$ auf $X$ ($\forall n\in\mdn$) und $f_n(x)\stackrel{n\to\infty}{\to}f(x)$ ($\forall x\in X$). In diesem Fall heißt $(f_n)$ \textbf{zulässig} für $f$.
-\item Es existiert eine Folge $(f_n)$ von einfachen Funktionen $f_n:X\to\mdr$, sodass $|f_n|\le |f|$ auf $X$ ($\forall n\in\mdn$) und $f_n(x)\stackrel{n\to\infty}{\to}f(x)$ ($\forall x\in X$).
-\item Ist $f$ beschränkt auf $X$ (also insbesondere $\pm\infty\not\in f(X)$), so kommt in (2) noch hinzu, dass $(f_n)$ auf $X$ gleichmäßig gegen $f$ konvergiert.
-\end{enumerate}
-\end{satz}
-
-\begin{folgerungen}[(Beweis mit 3.8(2) und 3.5)]
-Sei $f:X\to\imdr$ eine Funktion, dann ist $f$ genau dann messbar, wenn eine Folge einfacher Funktionen $(f_n)$ mit $f_n:X\to\mdr$ und $f_n(x)\stackrel{n\to\infty}\to f(x)$ für alle $x\in X$ existiert.
-\end{folgerungen}
-
-\begin{beweis}
-\begin{enumerate}
-\item Für $n\in\mdn$ definiere $\varphi_n:[0,\infty]\to[0,\infty)$ durch
-\[\varphi_n(t):=\begin{cases}\frac{[2^nt]}{2^n} &,0\le t<n\\ n &,n\le t\le\infty\end{cases}\]
-Dann ist $\varphi_n$ $(\fb_1)_{[0,\infty]}$-$\fb_1$-messbar, außerdem gilt:
-\begin{align*}
-\forall t\in[0,\infty]\forall n\in\mdn&: 0\le\varphi_1\le\cdots\le t\\
-\forall t\in[0,n]\forall n\in\mdn&: t-\frac1{2^n}\le\varphi_n(t)\le t 
-\end{align*}
-und es ist $\varphi_n(t)\stackrel{n\to\infty}\to t$ für alle $t\in[0\infty]$. Setze $f_n:=\varphi_n\circ f$. Dann leistet $(f_n)$ das gewünschte.
-\item Es ist $f=f_+-f_-$ und $f_+,f_-\ge0$ auf $X$. Seien $(g_n),(h_n)$ zulässige Folgen für $f_+$ bzw. $f_-$. Definiere $f_n:=g_n-h_n$. Dann ist klar, dass gilt:
-\[\forall x\in X: f_n(x)=g_n(x)-h_n(x)\stackrel{n\to\infty}\to f_+(x)-f_-(x)=f(x)\]
-Weiter gilt:
-\[|f_n|\le g_n+h_n\le f_++f_-=|f|\]
-\item Ohne Beweis. 
-\end{enumerate}
-\end{beweis}
-
-\chapter{Konstruktion des Lebesgueintegrals}
-\label{Kapitel 4}
-
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-Definitionen:
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
-In diesem Paragraphen sei $\varnothing\ne X\in\fb_d$. Wir schreiben außerdem $\lambda$ statt $\lambda_d$.
-
-\begin{definition}
-\index{Lebesgueintegral}
-Sei $f:X\to [0,\infty)$ eine einfache Funktion mit der Normalform $f=\sum_{j=1}^m y_j\mathds{1}_{A_j}$.\\
-Das \textbf{Lebesgueintegral} von $f$ ist definiert durch:
-\[\int_X f(x)\text{ d}x:=\sum_{j=1}^m y_j\lambda(A_j)\]
-\end{definition}
-
-\begin{satz}
-\label{Satz 4.1}
-Sei $f:X\to[0,\infty)$ einfach, $z_1,\ldots,z_k\in[0,\infty)$ und $B_1,\ldots,B_k\in\fb(X)$ mit $\bigcup B_j=X$ und $f=\sum_{j=1}^k z_j\mathds{1}_{B_j}$. Dann gilt:
-\[\int_X f(x)\text{ d}x=\sum_{j=1}^k z_j\lambda(B_j)\]
-\end{satz}
-
-\begin{beweis}
-In der großen Übung.
-\end{beweis}
-
-\begin{satz}
-\label{Satz 4.2}
-Seien $f,g:X\to[0,\infty)$ einfach, $\alpha, \beta\in[0,\infty)$ und $A\in\fb(X)$.
-\begin{enumerate}
-\item $\int_X \mathds{1}_A(x)\text{ d}x=\lambda(A)$
-\item $\int_X (\alpha f+\beta g)(x)\text{ d}x = \alpha\int_X f(x)\text{ d}x + \beta\int_X g(x)\text{ d}x$
-\item Ist $f\le g$ auf $X$, so ist $\int_X f(x)\text{ d}x\le \int_X g(x)\text{ d}x$.
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Folgt aus der Definition und \ref{Satz 4.1}.
-\item Es seien $f=\sum_{j=1}^m y_j \mathds{1}_{A_j}$ und $g=\sum_{j=1}^k z_j \mathds{1}_{B_j}$ die Normalformen von $f$ und $g$. Dann gilt:
-\[\alpha f+ \beta g=\sum_{j=1}^m \alpha y_j\mathds{1}_{A_j}+\sum_{j=1}^k \beta z_j\mathds{1}_{B_j}\]
-Dann gilt:
-\begin{align*}
-\int_X (\alpha f+\beta g) &\stackrel{\ref{Satz 4.1}}= \sum_{j=1}^m \alpha y_j \lambda(A_j) + \sum_{j=1}^k \beta z_j \lambda(B_j)\\
-&= \alpha \sum_{j=1}^m y_j \lambda(A_j) + \beta \sum_{j=1}^k z_j \lambda(B_j)\\
-&= \alpha \int_X f(x)\text{ d}x + \beta \int_X g(x)\text{ d}x
-\end{align*}
-\item Definiere $h:=g-f$. Dann ist $h\ge 0$ und einfach. Sei $h=\sum_{j=1}^m x_j\mathds{1}_{C_j}$ die Normalform von $h$, d.h. $x_1,\ldots,x_m\ge 0$. Dann gilt:
-\[\int_X h(x)\text{ d}x = \sum_{j=1}^m x_j\lambda(C_j)\ge 0\]
-Also folgt aus $g=f+h$ und (2):
-\[\int_X g(x)\text{ d}x=\int_X f(x)\text{ d}x +\int_X h(x)\text{ d}x\ge \int_X f(x)\text{ d}x\]
-\end{enumerate}
-\end{beweis}
-
-\begin{definition}
-\index{Lebesgueintegral}
-Sei $f:X\to[0,\infty]$ messbar. $(f_n)$ sei eine für $f$ zulässige Folge. Das \textbf{Lebesgueintegral} von $f$ ist definiert als:
-\begin{align*}
-\tag{$*$}\int_X f(x)\text{ d}x:=\lim_{n\to\infty}\int_X f_n(x)\text{ d}x
-\end{align*}
-\end{definition}
-
-\begin{bemerkung}\ 
-\begin{enumerate}
-\item In \ref{Satz 4.3} werden wir sehen, dass $(*)$ unabhängig ist von der Wahl der für $f$ zulässigen Folge $(f_n)$.
-\item $(f_n(x))$ ist wachsend für alle $x\in X$, d.h.:
-\[f(x)=\lim_{n\to\infty} f_n(x)=(\sup_{n\in\mdn} f_n)(x)\]
-\item Aus \ref{Satz 4.2}(3) folgt dass $(\int_X f_n(x)\text{ d}x)$ wachsend ist, d.h.:
-\[\lim_{n\to\infty} \int_X f_n(x)\text{ d}x = \sup\{\int_X f_n(x)\text{ d}x\mid n\in\mdn\}=\int_X f_(x)\text{ d}x\]
-\end{enumerate}
-\end{bemerkung}
-
-\textbf{Bezeichnung:}\\
-Für messbare Funktionen $f:X\to[0,\infty]$ definiere
-\[M(f):=\{\int_X g\text{ d}x\mid g:X\to[0,\infty) \text{ einfach und }g\le f\text{ auf }X\}\]
-
-\begin{satz}
-\label{Satz 4.3}
-Ist $f:X\to[0,\infty]$ messbar und $(f_n)$ zulässig für $f$, so gilt:
-\[L:=\lim_{n\to\infty}\int_X f_n\text{ d}x=\sup M(f)\]
-Insbesondere ist $\int_X f(x) \text{ d}x$ wohldefiniert.
-\end{satz}
-
-\begin{folgerungen}
-\label{Folgerung 4.4}
-Ist $f:X\to[0,\infty]$ messbar, so ist $\int_X f(x) \text{ d}x=\sup M(f)$.
-\end{folgerungen}
-
-\begin{beweis}
-Sei \(\int_Xf_n\,dx\in M(f) \,\forall\natn \). Dann ist \[L = \sup\left\{\int_Xf_n\,dx\mid\natn\right\} \leq \sup M(f)\]\\
-Sei nun $g$ einfach und \(0\leq g\leq f\). Sei weiter \[g=\sum^m_{j=1}y_j\mathds{1}_{A_j}\] die Normalform von $g$.\\
-Sei \(\alpha>1\) und \(B_n:=\{\alpha f_n\geq g\}\). Dann ist \[B_n\in\fb(X) \text{ und }(B_n\subseteq B_{n+1}\text{, sowie } \mathds{1}_{B_n}g\leq\alpha f_n.\]
-Sei \(x\in X\).\\
-\textbf{Fall 1:} Ist \(f(x)=0\), so ist wegen \(0\leq g\leq f\) auch \(g(x)=0\). Somit ist \(x\in B_n\) für jedes \(\natn\).\\
-\textbf{Fall 2:} Ist  \(f(x)>0\), so ist \[\frac{1}{\alpha}g(x)<f(x)\] (Dies ist klar für \(g(x)=0\) und falls gilt: \(g(x)>0\), so ist \(\frac{1}{\alpha}g(x)<g(x)\leq f(x) \) )\\
-Da $f_n$ zulässig für $f$ ist, gilt: \(f_n(x)\to f(x)\  (n\to\infty)\), weshalb ein \(n(x)\in\mdn\) existiert mit:
-\[\frac{1}{\alpha}g(x)<f(x)\text{für jedes } n\geq n(x)\]
-Es folgt \(x\in B_n\) für jedes \(n\geq n(x)\).\\
-\textbf{Fazit:} \(X=\bigcup B_n\). \[A_j=A_j\cap X=A_j\cap\left(\bigcup B_n\right) = \bigcup(A_j\cap B_n) \text{ und } A_j\cap B_n\subseteq A_j\cap B_{n+1} \]
-Aus \ref{Satz 1.7} folgt \(\lambda(A_j)=\lim\limits_{n\to\infty}\lambda(A_j\cap B_n)\). Das liefert:
-\begin{align*}
-   \int\limits_Xg\,dx &= \sum\limits_{j=1}^m y_j\lambda(A_j) 
-   = \sum\limits_{j=1}^m y_j\lim\limits_{n\to\infty}\lambda(A_j\cap B_n)\\ 
-   &=\lim\limits_{n\to\infty}\sum\limits_{j=1}^m y_j\lambda(A_j\cap B_n)
-   \overset{\ref{Satz 4.1}}= \lim\limits_{n\to\infty} \int\limits_X \mathds{1}_{B_n}g\,dx\\
-   &\leq  \lim\limits_{n\to\infty} \int\limits_X \alpha f_n\,dx
-   =\alpha L
-\end{align*}
-g war einfach und \(0\leq g\leq f\) beliebig, sodass \[\sup M(f)\leq\alpha L \overset{\alpha\to 1}\implies \sup M(f)\leq L \]
-\end{beweis}
-
-\begin{satz}
-\label{Satz 4.5}
-Seien $f,g:X\to[0,\infty]$ messbar und $\alpha,\beta\ge0$.
-\begin{enumerate}
-\item $\int_X (\alpha f+\beta g)(x) \text{ d}x=\alpha\int_X f(x) \text{ d}x+\beta\int_X g(x) \text{ d}x$
-\item Ist $f\le g$ auf $X$, so gilt $\int_X f(x) \text{ d}x\le \int_X g(x) \text{ d}x$
-\item $\int_X f(x) \text{ d}x=0 \iff \lambda(\{f>0\})=0$
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item \((f_n)\) und \((g_n)\) seien zulässig für $f$ bzw. $g$. Weiter sei \((h_n):=\alpha (f_n)+\beta (g_n) \).
-Dann ist wegen \ref{Satz 3.7} und \(\alpha , \beta \geq 0\), dass \((h_n)\) zulässig für \(\alpha f+\beta g\) ist. Dann:
-\begin{align*}
-\int_X(\alpha f + \beta g)\,dx
-&= \lim\limits_{n\to\infty}\int_X \left( \alpha (f_n)+\beta (g_n) \right)\,dx\\
-&\overset{\ref{Satz 4.2}}= \alpha\lim\limits_{n\to\infty}\int_X(f_n)\,dx + \beta\lim\limits_{n\to\infty}\int_X(g_n)\,dx\\
-&=\alpha\int_Xf\,dx + \beta\int_Xg\,dx
-\end{align*}
-\item Wegen \(f\leq g\) auf $X$ ist \(M(f)\subseteq M(g)\) und somit auch \(\sup M(f)\leq\sup M(g)\). Aus \ref{Folgerung 4.4} folgt nun die Behauptung.
-\item Setze \(A:=\{f>0\}=\{x\in X:f(x)>0\}\).
-\begin{enumerate}
-\item["'$\implies$"'] Sei \(\int_Xf\,dx=0\) und \(A_n:=\{f>\frac{1}{n}\}\). Dann ist \(A=\bigcup A_n\) und \(f\geq\frac{1}{n}\mathds{1}_{A_n}\). Damit folgt:
-\begin{align*}
-0 = \int_Xf\,dx 
-\overset{\text{(2)}}\geq \int_X\frac1{n}\mathds{1}_{A_n}\,dx
-=\frac1{n}\lambda(A_n)
-\intertext{Es ist also \(\lambda(A_n)=0\) und damit gilt weiter}
-\lambda(A)=\lambda(\bigcup A_n) \overset{\ref{Satz 1.7}}\leq \sum\lambda(A_n)=0
-\end{align*}
-Also ist auch \(\lambda(A)=0\).
-\item["'$\impliedby$"'] Sei \(\lambda(A)=0\), \((f_n)\) zulässig für $f$ und \(c_n:=\max\{f_n(x):x\in X\}\). Dann ist \(f_n\leq c_n\mathds{1}_A\) und es gilt:
-\[0 \leq \int_Xf_n\,dx\overset{\text{(2)}} \leq \int_Xc_n\mathds{1}_A\,dx = c_n\lambda(A) \overset{\text{Vor.}} = 0 \]
-Es ist also  \(\int_Xf_n\,dx=0\) für jedes $\natn$ und somit auch \(\int_Xf\,dx=0\)
-\end{enumerate}
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}[Satz von Beppo Levi (Version I)]
-\label{Satz 4.6}
-Sei $(f_n)$ eine Folge messbarer Funktionen $f_n:X\to[0,\infty]$ und es gelte $f_n\le f_{n+1}$ auf $X$ für jedes $n\in\mdn$.
-\begin{enumerate}
-\item Für alle $x\in X$ existiert $\lim_{n\to\infty} f_n(x)$.
-\item Die Funktion $f:X\to[0,\infty]$ definiert durch:
-\[f(x):=\lim_{n\to\infty} f_n(x)\]
-ist messbar.
-\item $\int_X \lim\limits_{n\to\infty}f_n(x) \text{ d}x=\int_X f(x) \text{ d}x=\lim\limits_{n\to\infty}\int_X f_n(x) \text{ d}x$
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Für alle $x\in X$ ist \(\left(f_n(x)\right)\) wachsend, also konvergent in \([0,+\infty]\).
-\item folgt aus \ref{Satz 3.5}.
-\item Sei \( \left(u_j^{(n)}\right)_{j\in\mdn} \) zulässig für $f_n$ und \(v_j:=\max\left\{u_j^{(1)}, u_j^{(2)}, \ldots , u_j^{(j)} \right\} \).
-Aus \ref{Satz 3.7} folgt, dass $v_j$ einfach ist und aus der Konstruktion lässt sich nachrechnen, dass gilt:
- \[0\leq v_j\leq v_{j+1} \text{ und } v_j\leq f_n\leq f \text{ und } f_n=\sup\limits_{j\in\mdn}u_j^{(n)} \leq \sup\limits_{j\in\mdn}v_j \text{ (auf $X$)}\]
-Damit ist $(v_j)$ zulässig für $f$ und es gilt:
-\[ \int_Xf\,dx=\lim\limits_{j\to\infty}\int_Xv_j\,dx\leq\lim\limits_{j\to\infty}\int_Xf_j\,dx\leq\int_Xf\,dx \]
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}[Satz von Beppo Levi (Version II)]
-\label{Satz 4.7}
-Sei $(f_n)$ eine Folge messbarer Funktionen $f_n:X\to[0,\infty]$.
-\begin{enumerate}
-\item Für alle $x\in X$ existiert $s(x):=\sum_{j=1}^\infty f_j(x)$.
-\item $s:X\to[0,\infty]$ ist messbar.
-\item $\int_X \sum_{j=1}^\infty f_j(x) \text{ d}x= \sum_{j=1}^\infty \int_X f_j(x) \text{ d}x$
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-Setze \[s_n:=\sum\limits_{j=1}^nf_j\]
-Dann erfüllt \((s_n)\) die Voraussetzungen von \ref{Satz 4.6}. Aus 4.6 und \ref{Satz 4.5}(1) folgt die Behauptung.
-\end{beweis}
-
-\begin{satz}
-\label{Satz 4.8}
-Sei $f:X\to[0,\infty]$ messbar und es sei $\varnothing\ne Y\in\fb(X)$ (also $Y\subseteq X$ und $Y\in\fb_d$). Dann sind die Funktionen $f_{|Y}:Y\to[0,\infty]$ und $\mathds{1}_Y\cdot f:X\to[0,\infty]$ messbar und es gilt:
-\[\int_Y f(x) \text{ d}x:=\int_Y f_{|Y}(x) \text{ d}x=\int_X (\mathds{1}_Y\cdot f)(x) \text{ d}x\]
-\end{satz}
-
-\begin{beweis}
-\textbf{Fall 1:} Die Behauptung ist klar, falls $f$ einfach ist. (Übung!)\\
-\textbf{Fall 2:} Sei \((f_n)\) zulässig für $f$ und \(g_n:=f_{n|Y} , h_n:=\mathds{1}_Y f_n\)
-Dann ist \((g_n)\) zulässig für \(f_{|Y}\) und \((h_n)\) ist zulässig für \(\mathds{1}_Y f_n\).
-Insbesondere sind  \(f_{n|Y}\) und \(\mathds{1}_Y f_n\) nach \ref{Satz 3.5} messbar.
-Weiter gilt:
-\[ \int_Y f_{|Y}\,dx \overset{n\to\infty}\longleftarrow \int_Yg_n\,dx \overset{Fall 1}=\int_Xh_n\,dx\overset{n\to\infty}\longrightarrow \int_X\mathds{1}_Yf\,dx   \]
-\end{beweis}
-
-\begin{definition}
-\index{integrierbar}\index{Integral}\index{Lebesgueintegral}
-Sei $f:X\to\imdr$ messbar. $f$ heißt (Lebesgue-)\textbf{integrierbar} (über $X$), genau dann wenn $\int_X f_+(x) \text{ d}x<\infty$ \textbf{und} $\int_X f_-(x) \text{ d}x<\infty$.\\
-In diesem Fall heißt:
-\[\int_X f(x) \text{ d}x:=\int_X f_+(x) \text{ d}x-\int_X f_-(x) \text{ d}x\]
-das (Lebesgue-)\textbf{Integral} von $f$ (über $X$).
-\end{definition}
-
-\textbf{Beachte:}\\
-Ist $f:X\to[0,\infty]$ messbar, so ist $f$ genau dann integrierbar, wenn gilt:
-\[\int_X f(x) \text{ d}x<\infty\]
-
-\begin{beispiel}
-Sei $X \in \fb_1$, $f(x) := \begin{cases} 1&,x\in X\cap\MdQ\\ 0&,x\in X\setminus\MdQ\end{cases} = \mathds{1}_{X\cap\MdQ}$.
-$X, \MdQ \in \fb_1 \implies X \cap \MdQ \in \fb_1 \implies f$ ist messbar.
-\[0 \leq \int_X f(x) \text{ d}x = \int_X \mathds{1}_{X\cap\MdQ} \text{ d}x = \lambda(X\cap\MdQ) \leq \lambda(\MdQ) = 0\]
-\textbf{Das heißt:} $f \in \fl^1(X)$, $\int_X f \text{ d}x = 0$.
-Ist speziell $X = [a,b]\quad (a<b)$, so gilt: $f \in \fl^1([a,b])$, aber $f \not\in R([a,b])$. 
-\end{beispiel}
-
-\begin{satz}[Charakterisierung der Integrierbarkeit]
-\label{Satz 4.9}
-Sei $f: X \to \imdr$ messbar. Die folgenden Aussagen sind äquivalent:
-\begin{enumerate}
- \item $f$ ist integrierbar.
- \item Es existieren integrierbare Funktionen $u, v: X \to [0,+\infty]$ mit $u(x)=v(x)=\infty$ für \textbf{kein} $x \in X$ und $f=u-v$ auf $X$.
- \item Es existiert eine integrierbare Funktion $g: X \to [0,+\infty]$ mit $\lvert f \rvert \leq g$ auf $X$.
- \item $\lvert f \rvert$ ist integrierbar.
-\end{enumerate}
-\end{satz}
-
-\textbf{Zusatz:}
-\begin{enumerate}
- \item $\fl^1(X) = \{f: X \to \mdr \mid f$ ist messbar und $\int_X \lvert f \rvert \text{ d}x < \infty\}$ (folgt aus (1)-(4)).
- \item Sind $u,v$ wie in (2), so gilt: $ \int_X f \text{ d}x = \int_X u \text{ d}x - \int_X v \text{ d}x$.
-\end{enumerate}
-
-
-\begin{beweis}[des Satzes]
-\begin{enumerate}
- \item[(1) $\Rightarrow$ (2)] $u:= f_+$, $v := f_-$.
- \item[(2) $\Rightarrow$ (3)] $g := u+v$, dann ist $u,v \geq 0$, $g \geq 0$, $\int_X g \text{ d}x \stackrel{4.5}{=} \int_X u \text{ d}x + \int_X v \text{ d}x < \infty$. $\implies g$ ist integrierbar und: $|f| = |u-v| \leq |u| + |v| = u+v = g$ auf $X$.
- \item[(3) $\Rightarrow$ (4)] \ref{Satz 4.5} $\implies \int_X |f| \text{ d}x \leq \int_X g \text{ d}x < \infty \implies f$ ist integrierbar.
- \item[(4) $\Rightarrow$ (1)] $f_+, f_- \leq |f|$ auf $X$. $\implies 0 \leq \int_X f_\pm \text{ d}x \leq \int_X |f| \text{ d}x < \infty \stackrel{Def.}{\implies} f$ ist integrierbar.
-\end{enumerate}
-\end{beweis}
-
-\begin{beweis}[des Zusatzes]
-\begin{enumerate}
- \item \checkmark
- \item Es ist $f = u-v = f_+ - f_- \implies u+f_- = f_+ + v$.
-\[\implies \int_X u \text{ d}x + \int_X f_- \text{ d}x \stackrel{4.5}{=} \int_X (u+ f_-) \text{ d}x = \int_X (f_+ + v) \text{ d}x \stackrel{4.5}{=} \int_X f_+ \text{ d}x + \int_X v \text{ d}x\]
-\[\implies \int_X u \text{ d}x - \int_X v \text{ d}x = \int_X f_+ \text{ d}x - \int_X f_- \text{ d}x \stackrel{Def.}{=} \int_X f \text{ d}x. \]
-\end{enumerate}
-\end{beweis}
-
-\begin{folgerungen}
-\label{Folgerung 4.10}
-\label{Satz 4.10}
-Sei $f:X\to\imdr$ integrierbar und $N := \{\lvert f \rvert = +\infty\} = \{x\in X : \lvert f(x) \rvert = + \infty\}$. Dann ist $N\in \fb(X)$ und $\lambda(N) = 0$.
-\end{folgerungen}
-
-\begin{beweis}
- $\ref{Satz 3.4} \implies N \in \fb(X).$ $n\mathds{1}_N \leq \lvert f \rvert$ für alle $n\in \MdN$. Dann: 
-\[n \cdot \lambda(N) = \int_X n\mathds{1}_N \text{ d}x \stackrel{4.5}{\leq} \int_X \lvert f \rvert \text{ d}x \stackrel{4.9}{<} \infty \text{  für alle } n \in \mdn\]
-Also: $0 \leq n\lambda(N) \leq \int_X \lvert f \rvert \text{ d}x \quad \forall n \in \mdn \implies \lambda(N) = 0$ 
-\end{beweis}
-
-\begin{satz}
-\label{Satz 4.11}
-$f, g: X \to \imdr$ seien integrierbar und es sei $\alpha \in \mdr$.
-\begin{enumerate}
- \item $\alpha f$ ist integrierbar und $\int_X (\alpha f) \text{ d}x = \alpha \int_X f \text{ d}x$.
- \item Ist $f+g:X\to\imdr$ auf $X$ definiert, so ist $f+g$ integrierbar und es gilt:
- \[\int_X (f+g)\text{ d}x = \int_X f \text{ d}x + \int_X g \text{ d}x\]
-(Für $f=+\infty$ und $g=-\infty$ ist $f+g$ beispielsweise nicht definiert.)
- \item $\fl^1(X)$ ist ein reeller Vektorraum und die Abbildung $f \mapsto \int_X f \text{ d}x$ ist linear auf $\fl^1(X)$.
- \item $\max\{f,g\}$ und $\min\{f,g\}$ sind integrierbar.
- \item Ist $f\leq g$ auf $X$, so ist $\int_X f \text{ d}x \leq \int_X g \text{ d}x$.
- \item $\lvert \int_X f \text{ d}x \rvert \leq \int_X \lvert f \rvert \text{ d}x$. (Dreiecksungleichung für Integrale)
- \item Sei $\varnothing\ne Y \in \fb(X)$. Dann sind die Funktionen $f_{|Y}: Y \to \imdr$ und $\mathds{1}_Y\cdot f: X \to \imdr$ integrierbar und
-\[\int_Y f(x) \text{ d}x := \int_Y f_{|Y} (x) \text{ d}x = \int_X(\mathds{1}_Y \cdot f)(x) \text{ d}x\]
- \item Sei $\lambda(X) < \infty$ und $h: X \to \mdr$ sei messbar und beschr\"ankt. Dann: $h \in \fl^1(X)$ und $\lvert \int_X h \text{ d}x\rvert \leq \|h\|_\infty \lambda(X) \quad$ (mit $\|h\|_\infty := \sup\{|h(x)| : x\in X\}$) 
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate} 
-\item folgt aus \(\alpha f)_{\pm}=\alpha f_{\pm}\), falls \(\alpha\geq0\) und \(\alpha f)_{\pm}=-\alpha f_{\mp}\), falls 
-    \(\alpha<0\).
-\item Es gilt \(f+g=\underbrace{f_{+}+g_{+}}_{=:u}-\underbrace{(f_{-}+g_{-})}_{=:v}=u-v\). Dann:
-\[
-\int_{X}{u\mathrm{d}x}=\int_{X}{f_{+}+g_{+}\mathrm{d}x}\overset{\ref{Satz 4.5}}{=}\int_{X}{f_{+}\mathrm{d}x}+\int_{X}{g_{+}\mathrm{d}x}<\infty
-\]
-Genauso: \(\int_{X}{v\mathrm{d}x}<\infty\)\\
-Mit Satz \ref{Satz 4.9} folgt: \(f+g\) ist integrierbar. Weiter:
-\begin{align*}
-\int_{X}{(f+g)\mathrm{d}x}&\overset{\ref{Satz 4.9}}{=}\int_{X}{u\mathrm{d}x}-\int_{X}{v\mathrm{d}x}\\
-    &=\int_{X}{f_{+}\mathrm{d}x}+\int_{X}{g_{+}\mathrm{d}x}-\left(\int_{X}{f_{-}\mathrm{d}x}+\int_{X}{g_{-}\mathrm{d}x}\right)\\
-    &=\int_{X}{f\mathrm{d}x}+\int_{X}{g\mathrm{d}x}
-\end{align*}
-\item folgt aus (1) und (2).
-\item Mit Satz \ref{Satz 3.5} folgt: \(\max\{f,g\}\) ist messbar. Es gilt:
-\[
-0\leq\lvert\max\{f,g\}\rvert\leq\lvert f\rvert+\lvert g\rvert
-\]
-Mit \ref{Satz 4.9} und Aussage (2) folgt \(\lvert f\rvert+\lvert g\rvert\) ist integrierbar. Dann folgt mit Satz \ref{Satz 4.9}:
-\(\max\{f,g\}\) ist integrierbar.\\
-Analog zeigt man: \(\min\{f,g\}\) ist integrierbar.
-\item Nach Voraussetzung ist \(f\leq g\) auf \(X\). Dann gilt: \(f_{+}\leq g_{+}\) auf \(X\) und \(f_{-}\geq g_{-}\) auf \(X\).
-Es folgt:
-\[
-\int_{X}{f\mathrm{d}x}=\int_{X}{f_{+}\mathrm{d}x}-\int_{X}{f_{-}\mathrm{d}x}\overset{\ref{Satz 4.5}}{\leq}\int_{X}{g_{+}\mathrm{d}x}-\int_{X}{g_{-}\mathrm{d}x}=\int_{X}{g\mathrm{d}x}
-\]
-\item Es ist \(\pm f\leq\lvert f\rvert\). Mit Aussage (1) und (5) folgt: 
-    \(\pm\int_{X}{f\mathrm{d}x}=\int_{X}{(\pm f)\mathrm{d}x}\leq\int_{X}{\lvert f\rvert\mathrm{d}x}\).\\
-Es ist \(\int_{X}{f\mathrm{d}x}=\lvert\int_{X}{f\mathrm{d}x}\rvert\) oder \(-\int_{X}{f\mathrm{d}x}=\lvert\int_{X}{f\mathrm{d}x}\rvert\)
-\item Mit Bemerkung (2) vor \ref{Satz 3.1} und Satz \ref{Satz 3.6}.(2) folgt: \(f_{|Y}\) und \(\mathds{1}_{Y}\cdot f\) sind
-messbar. Es gilt: \((f_{|Y})_{\pm}=(f_{\pm})_{|Y}\) und \((\mathds{1}_{Y}\cdot f)_{\pm}=\mathds{1}\cdot f_{\pm}\). Weiterhin 
-gilt \(0\leq\mathds{1}_{Y}f_{\pm}\leq f_{\pm}\). Mit \ref{Satz 4.9} folgt dann, da\ss \ \(\mathds{1}_{Y}f_{\pm}\) integrierbar
-ist. Dann:
-\begin{align*}
-\int_{X}{(\mathds{1}_{Y}f)\mathrm{d}x}&=\int_{X}{\mathds{1}f_{+}\mathrm{d}x}-\int_{X}{\mathds{1}_{Y}f\mathrm{d}x}\\
-    &=\underbrace{\int_{Y}{(f_{+})_{|Y}\mathrm{d}x}}_{<\infty}-\underbrace{\int_{Y}{(f_{-})_{|Y}\mathrm{d}x}}_{<\infty}
-\end{align*}
-Es folgt: \(f_{|Y}\) ist integrierbar und \(\int_{Y}{f_{|Y}\mathrm{d}x}=\int_{Y}{(f_{+})_{|Y}\mathrm{d}x}-\int_{Y}{(f_{-})_{|Y}\mathrm{d}x}=\int_{X}{(\mathds{1}_{Y}f)\mathrm{d}x}\).
-\item Es ist \(\lvert h\rvert\leq\lVert h\rVert_{\infty}\cdot\mathds{1}_{X}\). Dann folgt:
-\[
-\int_{X}{\lvert h\rvert\mathrm{d}x}\leq\int_{X}{\lVert h\rVert_{\infty}\mathds{1}_{X}\mathrm{d}x}=\lVert h\rVert_{\infty}\lambda(X)<\infty
-\]
-Damit: \(\lvert h\rvert\) ist integrierbar und mit \ref{Satz 4.9} auch \(h\). Da \(h\) beschr\"ankt ist, folgt: 
-\(h\in\fl^{1}(X)\). Schlie\ss lich:
-\[
-\left\lvert\int_{X}{h\mathrm{d}x}\right\rvert\leq\int_{X}{\lvert h\rvert\mathrm{d}x}\leq\lVert h\lVert_{\infty}\lambda(X)
-\]
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}
-\label{Satz 4.12}
-\begin{enumerate}
- \item Sind $\varnothing\ne A,B \in \fb(X)$ disjunkt, $X = A \cup B$ und ist $f: X \to \imdr$ integrierbar (über $X$), so ist $f$ integrierbar über $A$ und integrierbar über $B$ und es gilt:
- \[\int_X f \text{ d}x = \int_A f \text{ d}x + \int_B f \text{ d}x\]
- \item Ist $\varnothing \neq K \subseteq \mdr^d $ kompakt und $f:K\to\mdr$ stetig, so ist $f \in \fl^1(K)$.
-\end{enumerate}
-
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
- \item Aus \ref{Satz 4.11}(7) folgt: $f$ ist integrierbar \"uber $A$ und integrierbar \"uber $B$. Es ist 
-\[ \int_X f(x) \text{ d}x = \int_X \left( \mathds{1}_{A\cup B} \cdot f \right)(x) \text{ d}x = \int_X \left( \left( \mathds{1}_A + \mathds{1}_B \right) f\right)(x) \text{ d}x \]
-\[= \int_X \left(\mathds{1}_A f + \mathds{1}_B f \right)(x) \text{ d}x \stackrel{4.11(2)}{=} \int_X \mathds{1}_A f \text{ d}x + \int_X \mathds{1}_B f \text{ d}x \stackrel{4.11(7)}{=} \int_A f \text{ d}x + \int_B f \text{ d}x.\]
-
- \item $K$ ist kompakt, also gilt: $\lambda(K) < \infty$. Aus \ref{Satz 3.2}(1) folgt, dass $f$ messbar ist. Analysis II (\glqq stetige Funktionen auf kompakten Mengen nehmen Minimum und Maximum an\grqq ) liefert: $f$ ist beschr\"ankt. Insgesamt folgt mit \ref{Satz 4.11}(8) schlie"slich: $f \in \fl^1(K)$.
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}
-\label{Satz 4.13}
-Seien $a,b\in\mdr$, $a<b$, $X:=[a,b]$ und $f\in C(X)$. Dann ist $f\in\fl^1(X)$ und es gilt:
-\[L-\int_X f(x) \text{ d}x=R-\int_a^b f(x) \text{ d}x\]
-\end{satz}
-
-\begin{beweis}
-Sei $\natn$, $t_j^{(n)}:=a+j\frac{b-a}{n}$ ($j=0,\dots,n$) und $I_j^{(n)}:=\left[t_{j-1}^{(n)},t_j^{(n)}\right]$ ($j=1,\dots,n$).
-\begin{align*}
-S_n:=\sum^n_{j=1} f \left(t_j^{(n)}\right) \underbrace{ \frac{b-a}{n}}_{= \lambda_1 \left(I_j^{(n)}\right)} \text{ ist Riemannsche Zwischensumme für R-} \int_a^bf(x)\,dx.
-\end{align*}
-Aus Analysis I folgt $S_n\to\text{R-}\int_a^bf(x)\,dx$ ($n\to\infty$). 
-Definiere $f_n:=\sum^n_{j=1}f \left(t_j^{(n)} \right) \mathds{1}_{I_j^{(n)}} $. Dann ist $f_n$ einfach und 
-\[\int_X f_n(x)\,dx=\sum_{j=1}^n f \left(t_j^{(n)} \right) \lambda_1 \left(I_j^{(n)}\right)=S_n\]
-$f$ ist auf $X$ gleichmäßig stetig also konvergiert $f_n$ auf $X$ gleichmäßig gegen $f$ (Übung!), also gilt:
-\[\lVert f_n-f \rVert_{\infty}=\text{sup} \left \{ \lvert f_n(x)-f(x) \rvert : x\in X \right\} \to 0 \  (n\to \infty)\]
-Aus \ref{Satz 4.12}(2) folgt $f\in \mathfrak{L}^1(X)$
-\begin{align*}
-\left\lvert \text{L-} \int \limits_X f(x)\,dx -S_n \right\rvert = \left\lvert \text{L-} \int \limits_X (f-f_n)\,dx \right\rvert \stackrel{\text{4.11}}\leq \int \limits_X(f-f_n)\,dx \stackrel{\text{4.11}}\leq \lVert f-f_n \rVert_{\infty} \underbrace{\lambda(X)}_{=b-a} \to 0
-\end{align*}
-Daraus folgt $S_n \to$ L- $\int_X f\,dx$
-\end{beweis}
-
-\begin{satz}
-\label{Satz 4.14}
-Sei $a\in\mdr, X:=[a,\infty)$ und $f\in C(X)$. Dann gilt:
-\begin{enumerate}
-\item $f$ ist messbar.
-\item $f\in\fl^1(X)$ genau dann wenn das uneigentliche Riemann-Integral $\int_a^\infty f(x) \text{ d}x$ \textbf{absolut} konvergent ist. In diesem Fall gilt:
-\[L-\int_X f(x) \text{ d}x=R-\int_a^\infty f(x) \text{ d}x\]
-Entsprechendes gilt für die anderen Typen uneigentlicher Riemann-Integrale.
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-Eine Hälfte des Beweises folgt in Kapitel \ref{Kapitel 6}.
-\end{beweis}
-
-\begin{beispiel}
-\begin{enumerate}
-\item Sei $X=(0,1]$, $f(x)=\frac{1}{\sqrt{x}}$. Aus Analysis I wissen wir, dass R-$\int^1_0\frac{1}{\sqrt{x}}\,dx$ (absolut) konvergent ist. Also ist $f\in\mathfrak{L}^1(X)$.\\
-Außerdem wissen wir aus Analysis I, dass R-$\int_0^1\frac{1}{x}$ divergent ist. Also ist $f^2\notin\mathfrak{L}^1(X)$.
-\item Sei $X=[0,\infty)$, $f(x)=\frac{\sin(x)}{x}$. Aus Analysis I wissen wir, dass R-$\int^{\infty}_1f(x)\,dx$ konvergent, aber nicht absolut konvergent ist. Also ist $f\notin\mathfrak{L}^1(X)$.
-\end{enumerate}
-\end{beispiel}
-
-\chapter{Nullmengen}
-\label{Kapitel 5}
-
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-Definitionen:
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
-In diesem Paragraphen sei stets $\varnothing\ne X\in\fb_d$. Wir schreiben wieder $\lambda$ statt $\lambda_d$.
-
-\begin{definition}
-\index{Nullmenge}\index{Borel!Nullmenge}
-Sei $N\in\fb_d$. $N$ heißt eine \textbf{(Borel-)Nullmenge}, genau dann wenn $\lambda(N)=0$ ist.
-\end{definition}
-
-\begin{beispiel}
-\begin{enumerate}
-\item Ist $N\subseteq\mdr^d$ höchstens abzählbar, so ist $N\in\fb_d$ und $\lambda(N)=0$.
-\item Sei $j\in\{1,\dots,d\}$ und $H_j:=\left\{(x_1,\dots,x_d) \in\mdr^d : x_j=0 \right\}$. Aus Beispiel (5) nach \ref{Satz 2.7} folgt, dass $H_j$ eine Nullmenge ist.
-\end{enumerate}
-\end{beispiel}
-
-\begin{lemma}
-\label{Lemma 5.1}
-Seien $M,N,N_1,N_2,\ldots\in\fb_d$.
-\begin{enumerate}
-\item Ist $M\subseteq N$ und $N$ Nullmenge, dann ist $M$ Nullmenge.
-\item Sind alle $N_j$ Nullmengen, so ist auch $\bigcup N_j$ eine Nullmenge.
-\item $N$ ist genau dann eine Nullmenge, wenn für alle $\ep>0$ offene Intervalle $I_1,I_2,\ldots\subseteq\mdr^d$ existieren mit $N\subseteq\bigcup I_j$ und $\sum_{j=1}^\infty \lambda(I_j)\le\ep$.
-\end{enumerate}
-\end{lemma}
-
-\begin{beweis}
-\begin{enumerate}
-\item $0\le\lambda(M)\le\lambda(N)=0$
-\item $0\le\lambda(\bigcup N_j)\le\sum\lambda(N_j)=0$
-\item Folgt aus \ref{Satz 2.10}.
-\end{enumerate}
-\end{beweis}
-
-\begin{bemerkung}
-$\ $
-\begin{enumerate}
-\item $\mdq$ ist "`klein"': $\mdq$ ist "`nur"' abzählbar.
-\item $\mdq$ ist "`groß"': $\overline\mdq=\mdr$
-\item $\mdq$ ist "`klein"': $\lambda(\mdq)=0$
-\end{enumerate}
-\end{bemerkung}
-
-\begin{definition}
-\index{für fast alle}
-\index{fast überall}
-\begin{enumerate}
-\item Sei $(E)$ eine Eigenschaft für Elemente in $X$.\\
-$(E)$ gilt \textbf{für fast alle} (ffa) $x\in X$, genau dann wenn $(E)$ \textbf{fast überall} (fü) (auf $X$) gilt, genau dann wenn eine Nullmenge $N\subseteq X$ existiert, sodass $(E)$ für alle $x\in X\setminus N$ gilt.
-\item $\int_\varnothing f(x) \text{ d}x:=0$
-\end{enumerate}
-\end{definition}
-
-\begin{satz}
-\label{Satz 5.2}
-Seien $f:X\to\imdr$ messbare Funktionen.
-\begin{enumerate}
-\item Ist $f$ integrierbar, so ist $f$ fast überall endlich.
-\item Ist $f \ge0$ auf $X$, so ist $\int_X f(x)\text{ d}x=0$ genau dann wenn fast überall $f=0$.
-\item Ist $f$ integrierbar und $N\subseteq X$ eine Nullmenge, so gilt:
-\[\int_N f(x)\text{ d}x=0\] 
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item ist gerade \ref{Folgerung 4.10}.
-\item ist gerade \ref{Satz 4.5}(3)
-\item Setze $g:=\mathds{1}_N f$. Aus \ref{Satz 4.11} folgt, dass g integrierbar ist, also ist nach \ref{Satz 4.9} auch $\lvert g \rvert$ integrierbar. Für $x\in X\setminus N$ gilt: 
-\[g(x)=\lvert g(x) \rvert =0\]
-D.h. $\lvert g \rvert =0$ fast überall. Aus (2) folgt damit $\int_X \lvert g \rvert \,dx = 0$. Dann ist mit \ref{Satz 4.11}: \[\left\lvert\int_X g\,dx \right\rvert \leq \int_X \lvert g \rvert \,dx =0\] 
-und somit $\int_X g\,dx=0$.
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}
-\label{Satz 5.3}
-$f,g:X\to\imdr$ seien messbar.
-\begin{enumerate}
-\item Ist $f$ integrierbar und gilt fast überall $f=g$, so ist $g$ integrierbar und es gilt:
-\[\int_Xf\,dx=\int_Xg\,dx\]
-\item Ist $f$ integrierbar und $g:=\mathds{1}_{\{ \lvert f \rvert <\infty \}}\cdot f$, so ist $g$ integrierbar und es gilt: \[\int_Xf\,dx=\int_Xg\,dx\]
-\item Sind $f$ und $g$ beide $\geq0$ auf $X$, und ist fast überall $f=g$, so ist 
-\[\int_Xf\,dx=\int_Xg\,dx\]
-\end{enumerate}
-\end{satz}
-
-\begin{beweis}
-\begin{enumerate}
-\item Nach Voraussetzung existiert eine Nullmenge $N\subseteq X$, sodass gilt:
-\[\forall x\in X\setminus N:f(x)=g(x)\] 
-Aus \ref{Satz 5.2}(3) folgt dann $\int_N f\,dx=0$.
-Sei $x\in X\setminus N$ Dann gilt: 
-\[\left( \mathds{1}_N \lvert g \rvert \right)(x)=\mathds{1}_N(x)\cdot \lvert g(x) \rvert=0\] 
-D.h.: Fast überall ist $\mathds{1}_N \lvert g \rvert =0$. Aus \ref{Satz 5.2}(2) folgt $\int_N \lvert g \rvert\,dx=\int_X\mathds{1}_N\cdot \lvert g \rvert\,dx=0$.
-Dann gilt:
-\begin{align*}
-\int_X \lvert g\rvert\,dx & = \int_X \left(\mathds{1}_N \lvert g\rvert + \mathds{1}_{X\setminus N} \lvert g\rvert \right)\,dx\\ 
- &= \int_X\mathds{1}_N \lvert g\rvert\,dx + \int _X\mathds{1}_{X\setminus N} \lvert g\rvert\,dx\\
- &= \int_X \mathds{1}_{X\setminus N} \lvert g \rvert\,dx\\
-& \leq\int_X \lvert f\rvert\,dx \overset{\ref{Satz 4.9}}< \infty
-%hier soll eigentlich das kleinergleich unter das erste gleichzeichen...
-\end{align*}
-\ref{Satz 4.9} liefert nun, dass $\lvert g\rvert$ und damit auch $g$ integrierbar ist. Weiter gilt:
-\begin{align*}
-\int_Xg\,dx &\overset{\ref{Satz 4.12}} = \int_N g\,dx+ \int_{X\setminus N}g\,dx = \int_{X\setminus N}g\,dx\\
-&= \int_{X\setminus N}f\,dx \overset{\ref{Satz 5.2}(3)}= \int_N f\,dx +\int_{X\setminus N}f\,dx\\
-&\overset{\ref{Satz 4.12}}= \int_X f\,dx.
-\end{align*}
-
-\item Setze $N:=\left\{\lvert f\rvert =\infty \right\}$. Aus \ref{Satz 5.2}(1) folgt, dass $N$ eine Nullmenge ist. Sei $x\in X\setminus N$, so ist $x\in \left\{\lvert f\rvert <\infty \right\}$ und $g(x)=f(x)$.
-D.h. fast überall ist $f=g$. (Klar: $g$ ist mb). Dann folgt die Behauptung aus (1).
-\item \textbf{Fall 1:} $\int_Xf\,dx<\infty$\\
-Dann ist $f$ integrierbar, damit ist nach (1) auch $g$ integrierbar und es gilt:
-\[\int_Xf\,dx=\int_Xg\,dx\]
-\textbf{Fall 2:} $\int_Xf\,dx=\infty$.\\
-Annahme: $\int_Xg\,dx<\infty$. Dann gilt nach Fall 1: $\int_Xf\,dx<\infty$. $\lightning$
-\end{enumerate}
-\end{beweis}
-
-\begin{definition}
-$(f_n)$ sei eine Folge von Funktionen $f_n:X\to\imdr$.
-\begin{enumerate}
-\item $(f_n)$ konvergiert fast überall (auf $X$) genau dann, wenn eine Nullmenge $N\subseteq X$ existiert, sodass für alle  $x\in X\setminus N$ $\left(f_n(x)\right)$ in $\imdr$ konvergiert.
-\item Sei $f:X\to\imdr$. $(f_n)$ konvergiert fast überall (auf $X$) gegen $f$ genau dann, wenn eine Nullmenge $N\subseteq X$ existiert mit: $f_n(x)\to f(x) \forall x\in X\setminus N$\\
-In diesem Fall schreiben wir: $f_n\to f$ fast überall.
-\end{enumerate}
-\end{definition}
-
-\begin{satz}
-\label{Satz 5.4}
-Sei \((f_{n})\) eine Folge messbarer Funktionen \(f_{n}: X\to\imdr\) und \((f_{n})\) konvergiere fast \"uberall (auf \(X\)).
-Dann:
-\begin{enumerate}
-\item Es existiert \(f: X\to\imdr\) messbar mit \(f_{n}\to f\) fast \"uberall.
-\item Ist \(g: X\to\imdr\) eine Funktion mit \(f_{n}\to g\) fast \"uberall, so gilt \(f=g\) fast \"uberall.
-\end{enumerate}
-\end{satz}
-
-\begin{bemerkung}
-Ist \(g\) wie in (2), so muss \(g\) nicht messbar sein (ein Beispiel gibt es in der \"Ubung).
-\end{bemerkung}
-
-\begin{beweis}
-\begin{enumerate}
-\item Es existiert eine Nullmenge \(N_{1}\subseteq X:\,(f_{n}(x))\) konvergiert in \(\imdr\) für alle 
-\(x\in X\setminus N_{1}\).
-\[
-f(x)=\begin{cases}0&x\in N_{1}\\\lim_{n\to\infty}{f_{n}(x)}&x\in X\setminus N_{1}\end{cases}
-\]
-\(g_{n}:=\mathds{1}_{X\setminus N}\cdot f_{n}\), \(g_{n}\) ist messbar und \(g_{n}(x)\to f(x)\) für alle \(x\in X\).
-Mit \ref{Satz 3.5} folgt: \(f\) ist messbar.
-\item Es existiert eine Nullmenge \(N_{2}\subseteq X:\,f_{n}(x)\to g(x)\,\forall x\in X\setminus N_{2}\). 
-\(N=N_{1}\cup N_{2}\). Aus \ref{Lemma 5.1} folgt: \(N\) ist eine Nullmenge. 
-
-Für \(x\in X\setminus N:\,f(x)=g(x)\).
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}[Satz von Beppo Levi (Version III)]
-\label{Satz 5.5}
-Sei \((f_{n})\) eine Folge messbarer Funktionen \(f_{n}:\,X\to[0,+\infty]\) und für jedes \(n\in\mdn\) gelte:
-\(f_{n}\leq f_{n+1}\) fast überall.  Dann existiert eine messbare Funktion
-\(f:X\to[0,+\infty]\) mit: \(f_{n}\to f\) fast \"uberall und 
-\[\int_{X}{f\mathrm{d}x}=\lim_{n\to\infty}{\int_{X}{f_{n}\mathrm{d}x}}\]
-\end{satz}
-
-\begin{beweis}
-Zu jedem \(n\in\mdn\) existiert eine Nullmenge 
-\(N_{n}:\,f_{n}(x)\leq f_{n+1}(x)\forall x\in X\setminus N_{n}\). 
-\(N:=\bigcup_{n=1}^{\infty}{N_{n}}\); Mit \ref{Lemma 5.1} folgt: \(N\) ist eine
-Nullmenge.
-
-Dann: \(f_{n}(x)\leq f_{n+1}(x)\forall x\in X\setminus N\forall n\in\mdn\).
-
-\(\hat{f}_{n}:=\mathds{1}_{X\setminus N}\cdot f_{n}\), \(\hat{f}_{n}\) ist 
-messbar, \(\hat{f}_{n}\leq\hat{f}_{n+1}\) auf \(X\) f\"ur alle \(n\in\mdn\).
-
-\(f(x):=\lim_{n\to\infty}{\hat{f}_{n}(x)}\,(x\in X)\); \ref{Satz 3.5} liefert:
-\(f\) ist messbar. Weiter: \(\hat{f}_{n}\to f\).
-\[
-\int_{X}{f\mathrm{d}x}\overset{\text{\ref{Satz 4.6}}}{=}\lim_{n\to\infty}{\int_{X}{\hat{f}_{n}\mathrm{d}x}}\overset{\text{\ref{Satz 5.3}.(2)}}{=}\lim_{n\to\infty}{\int_{X}{f_{n}\mathrm{d}x}}
-\]
-\end{beweis}
-
-\chapter{Der Konvergenzsatz von Lebesgue}
-\label{Kapitel 6}
-
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-Definitionen:
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 Stets in diesem Paragraphen: \(\varnothing\neq X\in\fb_{d}\)
 
 \begin{lemma}[Lemma von Fatou]
@@ -1697,31 +709,26 @@ Weiter folgen aus \ref{Satz 6.2}:
 \end{beweis}
 
 
+
+\iffalse
+
+
 \chapter{Parameterintegrale}
 \label{Kapitel 7}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 
-Sätze / Eigenschaften: 
 
-\begin{align*}
-a&=b \\
-\end{align*}
 In diesem Paragraphen sei stets \(\varnothing\neq X\in \fb_d\).
 
 \begin{satz}
@@ -1798,28 +805,19 @@ Es ist nach Konstruktion  gerade \(\int_X g_n\,dx =\frac{F(t_0+h_n)-F(t_0)}{h_n}
 \chapter{Vorbereitungen auf das, was kommen mag}
 \label{Kapitel 8}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 
-Sätze / Eigenschaften: 
 
-\begin{align*}
-a&=b \\
-\end{align*}
 In diesem Paragraphen seien \(k,l,d\in\mdn\) und \(k+l=d\). \(\mdr^d\cong\mdr^k\times\mdr^l\). Für Punkte \(z\in\mdr^d\) schreiben wir \(z=(x,y)\), wobei \(x\in\mdr^k\) und \(y\in\mdr^l\).
 
 \begin{definition}
@@ -1918,28 +916,17 @@ Für \(C\in\fb_d\) gilt:
 \chapter{Das Prinzip von Cavalieri}
 \label{Kapitel 9}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 Die Bezeichnungen seien wie im Paragraphen 8.
 
 \begin{satz}[Prinzip von Cavalieri]
@@ -2103,28 +1090,17 @@ Dann ist
 \chapter{Der Satz von Fubini}
 \label{Kapitel 10}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 Die Bezeichnungen seien wie in den Paragraphen 8 und 9.
 
 \begin{satz}[Satz von Tonelli]
@@ -2438,28 +1414,17 @@ und daraus folgt \(\int_0^\infty e^{-xy}\,dy=\frac1x\)
 \chapter{Der Transformationssatz (Substitutionsregel)}
 \label{Kapitel 11}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 Die Sätze in diesem Paragraphen geben wir \textbf{ohne} Beweis an. Es seien
 \(X,Y\subseteq\mdr^d\) nichtleer und offen. 
 
@@ -2709,28 +1674,17 @@ Wir wollen das Kugelvolumen $\lambda_3(K)$ mit $K:=\{(x,y,z)\in\mdr^3\mid\|(x,y,
 \chapter{Vorbereitungen für die Integralsätze}
 \label{Kapitel 12}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 \begin{definition}
 \index{Kreuzprodukt}
 Seien $a=(a_1,a_2,a_3),b=(b_1,b_2,b_3)\in\mdr^3$. Dann heißt
@@ -2777,28 +1731,16 @@ Sei $\gamma:[a,b]\to\mdr^n$ ein Weg. Ist $\gamma$ in $t_0\in[a,b]$ differenzierb
 \chapter{Der Integralsatz von Gauß im $\MdR^2$}
 \label{Kapitel 13}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 In diesem Paragraphen sei $(x_0,y_0)\in\MdR^2$ (fest), es sei $R:[0,2\pi]\to[0,\infty)$ stetig und stückweise stetig differenzierbar und $R(0) = R(2\pi)$. Weiter sei 
 \begin{displaymath}
@@ -2869,28 +1811,16 @@ Mit Polarkoordinaten, Transformations-Satz und Fubini:
 \chapter{Flächen im $\MdR^3$}
 \label{Kapitel 14}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
-
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 \begin{definition}
 \index{Fläche}
@@ -2952,28 +1882,17 @@ Dann ist \(\varphi(u,v)=(u,v,u^{2}+v^{2})\), \(f_{u}=2u\) und \(f_{v}=2v\). Also
 \chapter{Integralsatz von Stokes}
 \label{Kapitel 15}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 In diesem Paragraphen sei \(\varnothing\neq B\subseteq\mdr^{2}\), \(B\) kompakt, \(D\subseteq\mdr^{2}\) offen, \(B\subseteq D\)
 und \(\varphi=(\varphi_{1},\varphi_{2},\varphi_{3})\in C^{1}(D,\mdr^{3})\). Das hei\ss t: \(\varphi_{|B}\) ist eine Fl\"ache mit 
 Parameterbereich \(B\), \(S:=\varphi(B)\)
@@ -3071,28 +1990,17 @@ Damit:
 \chapter{$\fl^{p}$-R\"aume und $\mathrm{L}^{p}$-R\"aume}
 \label{Kapitel 16}
 
-Symbole: 
-
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
-
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 Stets in diesem Paragraphen: \(\varnothing\neq X\in\fb_{d}\)
 
 \begin{definition}
@@ -3691,28 +2599,19 @@ Also ist $f\in L^p(X)$.
 \chapter{Das Integral im Komplexen}
 \label{Kapitel 17}
 
-Symbole: 
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 In diesem Paragraphen sei $\varnothing \ne X \in \fb_d, f: X \to \MdC$ eine Funktion, $ u:= \Re(f), v:= \Im(f)$, also: $u,v: X \to \MdR, f= u+iv$.
 
 Wir versehen $\MdC$ mit der $\sigma$-Algebra $\fb_2$ (wir identifizieren $\MdC$ mit $\mdr^2$).
@@ -3841,28 +2740,19 @@ Sei \(\{b_k\mid k\in\MdZ\}\) wie in \ref{Beispiel 17.2}. \(\{b_k\mid k\in\MdZ\}\
 \chapter{Fourierreihen}
 \label{Kapitel 18}
 
-Symbole: 
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
 
 Definitionen:
 
-\begin{tabular}{ p{3cm} p{2cm} p{4cm} p{6cm} }
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline
-  & $ $ & $ $ & \\
-\end{tabular}
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 
-Sätze / Eigenschaften: 
-
-\begin{align*}
-a&=b \\
-\end{align*}
 In diesem Paragraphen sei stets \(X=[0,2\pi]\), \(L^2:=L^2([0,2\pi],\mdc)\) und 
 \(L^2_\mdr:=L^2([0,2\pi],\mdr)\).  Weiter sei \(\{b_k\mid k\in\MdZ\}\) wie in \ref{Beispiel 17.2}.
 
@@ -4220,4 +3110,8 @@ und damit
 \textbf{§ 16: \(\fl^{p}\)-Räume und \(\mathrm{L}^{p}\)-Räume}: Philipp Ost, Rebecca Schwerdt, Peter Pan, Jan Ihrens \\
 \textbf{§ 17: Das Integral im Komplexen}: Peter Pan, Jan Ihrens \\
 \textbf{§ 18: Fourierreihen}: Jan Ihrens, Philipp Ost, Peter Pan \\
+
+
+\fi
+
 \end{document}
