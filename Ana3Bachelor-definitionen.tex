@@ -15,6 +15,7 @@
 \newunicodechar{⇒}{\Rightarrow}
 \newunicodechar{→}{\rightarrow}
 \newunicodechar{↦}{\mapsto}
+\newunicodechar{…}{\ldots}
 
 
 \lecturer{Dr. C. Schmoeger}
@@ -100,6 +101,23 @@ Sei $(f_n)$ eine Folge von Funktionen $f_n:X\to\imdr$.\\
 Kapitel 4:
 
 In diesem Paragraphen sei $\varnothing\ne X\in\fb_d$. Wir schreiben außerdem $\lambda$ statt $\lambda_d$.
+
+
+Kapitel 6 
+
+\(\varnothing\neq X\in\fb_{d}\)
+
+
+Kapitel 7 
+
+\(\varnothing\neq X\in \fb_d\).
+
+
+Kabitel 8
+
+
+In diesem Paragraphen seien \(k,l,d\in\mdn\) und \(k+l=d\). \(\mdr^d\cong\mdr^k\times\mdr^l\). Für Punkte \(z\in\mdr^d\) schreiben wir \(z=(x,y)\), wobei \(x\in\mdr^k\) und \(y\in\mdr^l\). \\
+Sei \(C\subseteq\mdr^d\).
 
 
 \newpage
@@ -306,6 +324,12 @@ Definitionen:
   	& $ $ 
   	& i.d.R.äquiv. zu Borelmessbar 
   	& \\
+  \hline messbare Funktion (alternatve Def.)
+  	& $f: X ⇒ \mdr$ ist messbar 
+  	& $ ∃ (f_n)$ mit $f_n:
+  	X⇒\mdr$ und $\lim_{n↦\inf} f_n(x) =f(x) $
+  	\newline
+  	& Diese Def. wird in weniger theoretischen Vorlesungen verwendet. Diese Def. ist gleichwertig zur obigen Def. \\
   \hline Borel-messbare Funktion
   	& $ $ 
   	& $\fb(X)-\fb_{k}$-messbar 
@@ -399,7 +423,7 @@ Definitionen:
   		\newline $f:X\to\imdr$ messbar
   		\newline $f\ge 0$ auf $X$
   		\newline $(f_n)$ Folge einfacher Funktionen $f_n:X\to[0,\infty)$
-  	& \\
+  	& „zulässig“ ist keine offizielle Definition und wird nur von Hr. Schnöger benutzt \\
 \end{longtable}
 
 
@@ -485,13 +509,13 @@ Definitionen:
 
 \begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline 
+  \hline Majorisierte Konvergenz
   	& $ $ 
-  	& $ $ 
+  	& siehe Ana 1 
   	& \\
-  \hline 
-  	& $ $ 
-  	& $ $ 
+  \hline Majorante
+  	& $ $
+  	& siehe Ana 1 
   	& \\
   \hline 
   	& $ $ 
@@ -499,218 +523,6 @@ Definitionen:
   	& \\
 \end{longtable}
 
-
-
-Stets in diesem Paragraphen: \(\varnothing\neq X\in\fb_{d}\)
-
-\begin{lemma}[Lemma von Fatou]
-\label{Lemma 6.1}
-\((f_{n})\) sei eine Folge messbarer Funktionen \(f_{n}:\,X\to[0,+\infty]\).
-\begin{enumerate}
-\item Es gilt:
-\[\int_{X}{(\liminf_{n\to\infty}f_{n})(x)\mathrm{d}x}\leq\liminf_{n\to\infty}{\int_{X}{f_{n}(x)\mathrm{d}x}}\]
-\item Ist \(f: X\to[0,+\infty]\) messbar und gilt \(f_{n}\to f\) fast \"uberall,
-so ist
-\[
-\int_{X}{f\mathrm{d}x}\leq\liminf_{n\to\infty}{\int_{X}{f_{n}\mathrm{d}x}}
-\]
-\item Ist \(f\) wie in (2) und ist \(\left(\int_{X}{f_{n}\mathrm{d}x}\right)\)
-beschr\"ankt, so ist \(f\) integrierbar.
-\end{enumerate}
-\end{lemma}
-
-\begin{beweis}
-\begin{enumerate}
-\item \(g_{j}:=\inf_{n\geq j}{f_{n}}\). Aus \ref{Satz 3.5} folgt: \(g_{j}\) ist messbar, klar: \(g_{j}\leq g_{j+1}\) auf
-\(X\); \(\sup_{j\in\mdn}{g_{j}}=\liminf_{n\to\infty}{f_{n}}\)
-
-Weiter: \(g_{j}\leq f_{n}\,(n\geq j)\)
-
-Dann:
-\begin{align*}
-    \int_{X}{\liminf_{n\to\infty}f_{n}\mathrm{d}x}&=\int_{X}{\sup_{j\in\mdn}g_{j}\mathrm{d}x}\\
-	&=\int_{X}{\lim_{j\to\infty}g_{j}(x)\mathrm{d}x}\\
-	&\overset{\ref{Satz 4.6}}{=}\lim_{j\to\infty}\int_{X}{g_{j}\mathrm{d}x}\\
-	&=\sup_{j\in\mdn}\underbrace{\int_{X}{g_{j}\mathrm{d}x}}_{\leq\inf_{n\geq j}\int_{X}{f_{n}\mathrm{d}x}}\\
-	&\leq\sup_{j\in\mdn}\left\{\inf_{n\geq j}\int_{X}{f_{n}\mathrm{d}x}\right\}\\
-	&=\liminf_{n\to\infty}\int_{X}{f_{n}\mathrm{d}x}
-\end{align*}
-\item Es existiert eine Nullmenge \(N\subseteq X\): \(f_{n}(x)\to f(x)\,\forall x\in X\setminus N\). Dann:
-\(f=\mathds{1}_{X\setminus N}\cdot f\) fast \"uberall.
-\begin{align*}
-    \int_{X}{f\mathrm{d}x}&\overset{\text{\ref{Satz 5.3}.(3)}}{=}\int_{X}{\mathds{1}_{X\setminus N}\cdot f\mathrm{d}x}\\
-    &=\int_{X}{(\lim_{n\to\infty}\mathds{1}_{X\setminus N}f_{n})\mathrm{d}x}\\
-    &\overset{(1)}{\leq}\liminf_{n\to\infty}\int_{X}{\mathds{1}_{X\setminus N}f_{n}\mathrm{d}x}\\
-    &\overset{\text{\ref{Satz 5.3}.(3)}}{=}\liminf_{n\to\infty}\int_{X}{f_{n}\mathrm{d}x}
-\end{align*}
-\item folgt aus (2). Nach Voraussetzung gilt 
-\[
-0\leq\int_{X}{f\mathrm{d}x}\overset{\text{(2)}}{\leq}\liminf_{n\to\infty}\int_{X}{f_{n}\mathrm{d}x}<\infty
-\]
-\end{enumerate}
-\end{beweis}
-
-\begin{satz}[Konvergenzsatz von Lebesgue (Majorisierte Konvergenz)]
-\label{Satz 6.2}
-\((f_{n})\) sei eine Folge messbarer Funktionen \(f_{n}:X\to\imdr\), \((f_{n})\)
-konvergiere fast \"uberall und es sei \(g:X\to[0,+\infty]\) integrierbar. F\"ur
-jedes \(n\in\mdn\) gelte \(\lvert f_{n}\rvert\leq g\) fast \"uberall. Dann sind
-alle \(f_{n}\) integrierbar und es existiert ein \(f\in\fl^{1}(X)\) mit:
-\begin{enumerate}
-\item \(f_{n}\to f\) fast \"uberall
-\item \(\int_{X}{f_{n}\mathrm{d}x}\to\int_{X}{f\mathrm{d}x}\)
-\item \(\int_{X}{\lvert f_{n}-f\rvert\mathrm{d}x}\to 0\)
-\end{enumerate}
-\end{satz}
-
-\begin{beispiel}
-% Hier fehlt eventuell eine Graphik...
-Sei \(X=\mdr,\,f_{n}:=n\mathds{1}_{(0,\frac{1}{n})}\). Dann:
-\[
-\int_{X}{f_{n}\mathrm{d}x}=n\cdot\lambda_{1}\left(\left(0,\frac{1}{n}\right)\right)=n\cdot\frac{1}{n}=1\forall n\in\mdn
-\]
-Es gilt \(f_{n}\to f:=0\) punktweise und \(\int_{X}{f\mathrm{d}x}=0 \neq 1 = \int_{X}{f_{n}\mathrm{d}x}\). \ref{Satz 6.2} ist ohne Majorante im allgemeinen
-falsch.
-\end{beispiel}
-
-\begin{beweis}
-% Nummerierung vernuenftig zurechtbasteln
-\begin{enumerate}
-\item Aus \ref{Satz 5.4} folgt: Es existiert \(\hat{f}:X\to\imdr\) messbar mit \(f_{n}\to\hat{f}\) fast \"uberall.
-Es existiert eine Nullmenge \(N_{0}\subseteq X:\,f_{n}(x)\to\hat{f}(x)\,\forall x\in X\setminus N_{0}\)
-\item F\"ur alle \(n\in\mdn\) existiert eine Nullmenge \(N_{n}\subseteq X:\,\lvert f_{n}(x)\rvert\leq g(x)\,\forall x\in X\setminus N_{n}\).
-
-Setze \(N:=\bigcup_{n=0}^{\infty}{N_{n}}\). Mit \ref{Lemma 5.1} folgt: \(N\) ist eine Nullmenge.
-
-Wir haben: \(\lvert f_{n}(x)\rvert\leq g(x)\,\forall x\in X\setminus N\forall n\in\mdn\) und
-\(\lvert\hat{f}(x)\rvert\leq g(x)\,\forall x\in X\setminus N\).
-\item \(f_{n}=\mathds{1}_{X\setminus N}f_{n}\) fast \"uberall und \(\hat{f}=\mathds{1}_{X\setminus N}\hat{f}\)
-fast \"uberall.
-
-Es gilt \(\lvert\mathds{1}_{X\setminus N}f_{n}\rvert\leq g\) und \(\lvert\mathds{1}_{X\setminus N}\hat{f}\rvert\leq g\). Mit
-\ref{Satz 4.9} folgt: \(\mathds{1}_{X\setminus N}f_{n}\) und \(\mathds{1}_{X\setminus N}\hat{f}\) sind integrierbar.
-
-Mit \ref{Satz 5.3}.(1) folgt: \(f_{n}\) und \(\hat{f}\) sind integrierbar.
-\item \(\tilde{N}:=N\cup\{\lvert\hat{f}\rvert=\infty\}\cup\{g=\infty\}\). Mit \ref{Folgerung 4.10} und \ref{Lemma 5.1} folgt:
-\(\tilde{N}\) ist eine Nullmenge.
-
-Setze \(f:=\mathds{1}_{X\setminus N}\hat{f}\). Dann: \(f\) ist messbar; es ist \(\lvert f\rvert\leq\lvert\hat{f}\rvert\).
-Mit \ref{Satz 4.9} folgt: \(f\) ist integrierbar.
-
-Es ist \(f(X)\subseteq\mdr\). Also: \(f\in\fl^{1}(X)\).
-
-Sei \(x\in X\setminus\tilde{N}:\,f(x)=\tilde{f}(x)=\lim_{n\to\infty}f_{n}(x)\).
-D.h. \(f_{n}\to f\) fast \"uberall.
-\item Definiere $g_n:=|f|+\mathds{1}_{X\setminus \tilde N}g-\mathds{1}_{X\setminus \tilde N}|f_n-f|$. Es ist fast überall
-\begin{align*}
-\mathds{1}_{X\setminus \tilde N}g=g&&\mathds{1}_{X\setminus \tilde N}|f_n-f|=|f_n-f|
-\end{align*}
-Nach \ref{Satz 5.3}(1) ist $g$ integrierbar und $g_n\to |f|+g$ fast überall. Es gilt:
-\begin{align*}
-|f_n-f|\le|f_n|+|f|\le g+|f| \text{ auf} X\setminus\tilde N
-\end{align*}
-D.h. es ist $g\ge0$ auf X.
-\item Es gilt:
-\begin{align*}
-\int_X(|f|+g)\text{ d}x&\stackrel{\ref{Lemma 6.1}(2)}\le \liminf_{n\to\infty} \int_X g_n \text{ d}x\\
-&=\liminf \left(\int_{\tilde N} g_n\text{ d}x+\int_{X\setminus\tilde N}g_n\text{ d}x\right)\\
-&=\liminf \int_{X\setminus\tilde N}g_n\text{ d}x\\
-&=\liminf \int_{X\setminus\tilde N}(|f|+g-|f_n-f|)\text{ d}x\\
-&=\int_{X\setminus\tilde N} (|f|+g)\text{ d}x-\limsup \int_{X\setminus\tilde N}|f_n-f|\text{ d}x\\
-&\stackrel{\ref{Satz 5.2}(3)}= \int_X |f|+g\text{ d}x-\limsup\int_X |f_n-f|\text{ d}x
-\end{align*}
-Daraus folgt:
-\[\limsup\int_x|f_n-f|\text{ d}x\le 0\]
-Also gilt auch:
-\[|\int_Xf_n\text{ d}x-\int_Xf\text{ d}x|=|\int_X(f_n-f)\text{ d}x\le \int_X|f_n-f|\text{ d}x\to 0\]
-\end{enumerate}
-\end{beweis}
-
-\begin{beispiel}
-Sei \(X:=[1,\infty)\) und \(f_n(x):=\frac1{x^\frac32}\sin\left(\frac xn \right) \) für alle \(x\in X, n\in\mdn\) mit \(f_n(x)\to f(x)\equiv 0\) für jedes \(x\in X\).
-Dann ist \(\lvert f_n(x) \rvert\leq \frac1{x^\frac32}\) für jedes \(x\in X\) und $\natn$. 
-Definiere nun \[g(x):=\frac1{x^\frac32}\]
-Aus Analysis I ist bekannt, dass \(\int^\infty_1 g(x)\,dx\) (absolut) konvergent ist 
-und aus \ref{Satz 4.14} folgt \[g\in\mathfrak{L}^1(X) \text{ sowie } \int_X g(x)\,dx = \text{R-}\int^\infty_1 g(x)\,dx\]
-Weiter folgen aus \ref{Satz 6.2}:
-\[\int_X f_n\,dx\to 0 \text{ und } \int_X\lvert f_n\rvert\,dx\to 0 \ (n\to\infty) \]
-\end{beispiel}
-
-\begin{folgerung}[aus \ref{Satz 6.2}]
-\label{Folgerung 6.3}
-\begin{enumerate}
-	\item 	Sei \(f:X\to\imdr\) messbar und \((A_n)\) sei eine Folge in \(\fb(X)\) mit \(A_n\subseteq A_{n+1}\) für jedes $\natn$ und \(X=\bigcup A_n\). Weiter sei
-		\begin{align*}
-		f_n:=\mathds{1}_{A_n}\cdot f \text{ integrierbar für alle } \natn \intertext{und} \left(\int_{A_n}\lvert f\rvert\,dx\right) \text{ sei beschränkt. }
-		\end{align*}
-		Dann ist $f$ integrierbar und es gilt: \[\int_{A_n}f\,dx \to \int_Xf\,dx \quad \text{für } n \to \infty\]
-	\item 	Sei \(a\in\mdr\), \(X:=[a,\infty]\) und \(f:X\to\mdr\) sei stetig. Weiter sei R-\(\int_a^\infty f\,dx\) \textbf{absolut} konvergent. Dann ist \(f\in\mathfrak{L}^1(X)\) und wie in 					\ref{Satz 4.14}:
-		\[\text{L-}\int_Xf\,dx=\text{R-}\int^\infty_a f\,dx \]
-\end{enumerate}
-\end{folgerung}
-
-\begin{beweis}
-\begin{enumerate}
-	\item 	Sei \(x\in X\). Es exisitert ein $m\in\mdn$, für das \(x\in A_m\) ist und somit auch \(x\in A_n \) für jedes \(n\geq m\). Nach der Definition von $f_n$ gilt dann \(f_n(x)=f(x)\) für jedes 				\(n\geq m\) und somit \(f_n\to f\) auf $X$. Damit gilt auch \[\lvert f_n\rvert\to\lvert f\rvert \text{ auf } X\] Durch die Konstruktion der $f_n$ ergibt sich: 
-		\[ \lvert f_n\rvert=\lvert \mathds{1}_{A_n}f\rvert=\mathds{1}_{A_n}\lvert f\rvert \leq \mathds{1}_{A_{n+1}}\lvert f\rvert=\lvert f_{n+1}\rvert \]
-		Dann gilt:
-		\[ \int_X \lvert f\rvert\,dx \overset{\ref{Satz 4.6}}=\lim\int_X \lvert f_n\rvert\,dx = \lim\int_{A_n} \lvert f\rvert\,dx \overset{Vor.}<\infty \]
-		Es folgt, dass \(\lvert f\rvert\) integrierbar ist und somit ist nach \ref{Satz 4.9} auch $f$ integrierbar. Da \(\lvert f_n\rvert \leq \lvert f\rvert\) auf $X$ für jedes \(\natn\) gilt, ist $f$ eine 		
-		integrierbare Majorante und es folgt mit \ref{Satz 6.2}:
-		\[ \int_Xf\,dx = \lim\int_Xf_n\,dx = \lim\int_{A_n}f\,dx \]
-	\item 	Setze \(A_n:=[a,n]\ (\natn)\) und es gelte o.B.d.A.: \(a\leq 1\). Dann gilt:
-		\[ \int_{A_n}\lvert f\rvert\,dx \overset{\ref{Satz 4.13}}= \text{R-}\int^n_a \lvert f\rvert\,dx \overset{Vor.}\longrightarrow \text{R-}\int^\infty_a \lvert f\rvert\,dx \]
-		D.h.\(\left(\int_{A_n}\lvert f\rvert\,dx\right)\) ist beschränkt. Definiere \(f_n:=\mathds{1}_{A_n}f\) mit \ref{Satz 4.13} folgt daraus, dass $f_n$ integrierbar ist. Weiter folgt
-		aus (1) \(f\in\mathfrak{L}^1(X)\) (denn es ist \(f(X)\subseteq\mdr\)) und 
-		\[ \text{L-}\int_Xf\,dx = \lim\int_{A_n}f\,dx \overset{\ref{Satz 4.13}}= \lim\left(\text{R-}\int^n_a f\,dx \right) = \text{R-}\int^\infty_a f\,dx. \]
-\end{enumerate}
-\end{beweis}
-
-\begin{bemerkung}
-\ref{Folgerung 6.3}(2) gilt entsprechend für die anderen Typen uneigentlicher Riemann-Integrale.
-\end{bemerkung}
-
-\begin{folgerung}
-\label{Folgerung 6.4}
-\begin{enumerate}
-	\item 	\((f_n)\) sei eine Folge integrierbarer Funktionen \(f_n\colon X\to\imdr\), \(g\colon X\to[0,+\infty]\) sei ebenfalls integrierbar und 
-		\[g_n:=f_1+f_2+\ldots+f_n \ (\natn)\]
-		Weiter sei $N$ eine Nullmenge in $X$ so, dass \((g_n(x))\) für jedes \(x\in X\setminus N\) in $\imdr$  konvergiert und 
-		\[\lvert g_n(x)\rvert \leq g(x) \text{ für jedes } \natn \text{ und } x\in X\setminus N\]
-		Setzt man
-		\[f(x):=\sum^\infty_{j=1}f_j(x):=	
-		\begin{cases}
-			0, 				& \text{falls } x\in N 			\\
-			\lim\limits_{n\to\infty}g_n(x), & \text{falls } x\in X\setminus N
-		\end{cases}\quad,\]
-		so gilt, dass $f$ integrierbar ist und
-		\[\int_X \left( \sum^\infty_{j=1}f_j(x) \right)\,dx = \sum^\infty_{j=1}\left( \int_Xf_j(x)\,dx \right) \]
-	\item 	Sei \(f\in\mathfrak{L}^1(X)\) und \((A_n)\) eine \textbf{disjunkte} Folge in \(\fb(X)\) mit \(X=\dot\bigcup A_n\). Dann gilt
-		\[\int_Xf\,dx = \sum^\infty_{j=1}\int_{A_j}f\,dx \]
-\end{enumerate}
-\end{folgerung}
-
-\begin{beweis}
-\begin{enumerate}
-	\item 	Fast überall gelten \(g_n\to f\) und für jedes \(\natn\) auch \(\lvert g_n\rvert \leq g\). Aus \ref{Satz 6.2} folgt
-		\begin{align*}
-			\int_X \left(\sum^\infty_{j=1}f_j(x)\right) \,dx 
-			&= \int_Xf\,dx  					\\
-			&\overset{\ref{Satz 6.2}}= \lim\int_Xg_n\,dx 	\\
-			&= \lim\int_X\left(\sum^n_{j=1}f_j\right)\,dx 	\\
-			&=\lim\sum^n_{j=1}\int_Xf_j(x)\,dx 			\\
-			&=\sum^\infty_{j=1}\int_Xf_j\,dx 			\\
-		\end{align*}
-	\item 	Setze \(f_j:=\mathds{1}_{A_j}f\), \(g:=\lvert f\rvert\), \(g_n:=f_1+\ldots+f_n\). Dann ist
-		\[\lvert g_n\rvert = \lvert \mathds{1}_{A_1\cup\ldots\cup A_n}\cdot f\rvert \leq \lvert f\rvert =g \]
-		Es gilt: \(g_n\to f\) auf $X$. Aus (1) folgt
-		\[ \int_Xf\,dx = \sum^\infty_{j=1}\int_Xf_j\,dx = \sum^\infty_{j=1}\int_{A_j}f\,dx \]
-\end{enumerate}
-\end{beweis}
-
-
-
-\iffalse
 
 
 \chapter{Parameterintegrale}
@@ -721,86 +533,30 @@ Definitionen:
 
 \begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline 
-  	& $ $ 
-  	& $ $ 
+  \hline Intergal 
+  	& $F(t)$ 
+  	& $$\int_Xf(t,x)\,dx$$ 
+  		\tiny \newline mit $f\colon U\times X\to \mdr$ integrierbar
+  		\newline Es existiert eine Nullmenge \(N\subseteq X\) so, dass \(t\mapsto f(t,x)\) für jedes \(x\in X\setminus N\) stetig in $t_0$ ist.
   	& \\
+  \hline integrierbar
+  	&  $x\mapsto f(t,x)$ ist für jedes $t\in U$ integrierbar
+  	& \tiny  $U\in\fb_k, t_0\in U$ 
+  		\newline $(1)$ $∀ t\in U:x\mapsto f(t,x)$ messbar
+  		\newline $(2)$ $∃$ Nullmenge $N\subseteq X: ∀ x\in X\setminus N: t\mapsto f(t,x)$stetig in $t_0$
+		\newline $(3)$ $∃$ integrierbare Funktion \(g\colon X\to [0,\infty]\) und $ ∀t\in U: ∃$ Nullmenge \(N_t\subseteq X:$\newline$ ∀ t\in U, x\in X\setminus N_t\) gilt: $ \lvert f(t,x)\rvert \leq g(x) $
+  	& \\
+  \hline partielle Integration
+  	& $$\frac{\partial F}{\partial t_j}(t)$$
+  	& $$ \int_X\frac{\partial f}{\partial t_j}(t,x)\,dx $$
+	  	\tiny \newline mit
+	  	\newline (1) $f(t,x)$ part. differenzierbar
+	  	\newline (2) $f(x,t)$ integriebar
+	  	\newline (3) $\left\lvert \frac{ \partial f}{\partial t_j} \right\rvert \leq g(x)$, $∀x \in X \setminus N ,j \in \mdn$
+	  	
+  	& keine Ahnung, wo das $g$ herkommt\\
 \end{longtable}
 
-
-
-In diesem Paragraphen sei stets \(\varnothing\neq X\in \fb_d\).
-
-\begin{satz}
-\label{Satz 7.1}
-Sei \(U\in\fb_k, t_0\in U\) und es sei \(f\colon U\times X\to \mdr\) eine Funktion mit:
-\begin{enumerate}
-	\item 	Für jedes \(t\in U\) ist \(x\mapsto f(t,x)\) messbar.
-	\item 	Es existiert eine Nullmenge \(N\subseteq X\) so, dass \(t\mapsto f(t,x)\) für jedes \(x\in X\setminus N\) stetig in $t_0$ ist.
-	\item 	Es existiert eine integrierbare Funktion \(g\colon X\to [0,\infty]\) und zu jedem \(t\in U\) existiert eine Nullmenge \(N_t\subseteq X\) so, dass für 
-		jedes \(t\in U\) und jedes \(x\in X\setminus N_t\) gilt: \[ \lvert f(t,x)\rvert \leq g(x) \]
-\end{enumerate}
-Dann ist \(x\mapsto f(t,x)\) für jedes \(t\in U\) integrierbar. Ist \(F\colon U\to\mdr\) definiert durch
-\[ F(t):=\int_Xf(t,x)\,dx,\]
-so ist $F$ stetig in $t_0$.
-\end{satz}
-
-Also: \[ \lim\limits_{t\to t_0}\int_X f(t,x)\,dx = \lim\limits_{t\to t_0}F(t)=F(t_0) = \int_X f(t_0,x)\,dx =\int_X\lim\limits_{t\to t_0} f(t,x)\,dx \]
-
-\begin{beweis}
-Aus (1) und (3) folgt, dass \(x\mapsto f(t,x)\) für jedes \(t\in U\) integrierbar ist (zur Übung). Sei \((t_n)\) eine Folge in $U$ mit \(t_n\to t_0\) und 
-\[g_n(x):=f(t_n,x) \ (\natn, x\in X) \]
-Setze \[ \tilde N := N\cup \left(\bigcup^\infty_{n=1}N_{t_n} \right) \]
-Aus \ref{Lemma 5.1} folgt, dass \(\tilde N\) eine Nullmenge ist. Voraussetzung (2) liefert \(g_n(x)\to f(t_0,x)\) für jedes \(x\in X\setminus\tilde N\), also gilt 
-\[g_n(x)\to f(t_0,x) \text{ fast überall auf } X\]
-Voraussetzung (3) liefert \(\lvert g_n(x)\rvert = \lvert f(t_n,x)\rvert \leq g(x) \) für jedes \(\natn\) und \(x\in X\setminus\tilde N\). Aus \ref{Satz 6.2} folgt
-\[ F(t_n) = \int_X f(t_n,x)\,dx = \int_Xg_n\,dx \longrightarrow \int_X f(t_0,x)\,dx = F(t_0) \]
-\end{beweis}
-
-\textbf{Bezeichnung}\\
-Sei \(I\subseteq\mdr\) ein Intervall, \(a:=\inf I\) und \(b:=\sup I\), wobei \(a=-\infty\) oder \(b=+\infty\) zugelassen sind. Weiter sei \(f\colon I\to\imdr\) integrierbar 
-(oder $f$ ist messbar und \(\geq 0\)) und 
-\[\int\limits^b_af(x)\,dx:=\int\limits_{(a,b)}f_{|(a,b)}(x)\,dx \]
-Dann ist 
-\[ \int_I f(x) dx = \int_{(a,b)} f(x) dx\]
-Ist z.B. \(I=[a,b)\), dann gilt, da \(\{a\}\) eine Nullmenge ist: \[\int_If\,dx=\int_{\{a\}}f\,dx + \int_{(a,b)}f\,dx= \int_{(a,b)}f\,dx \] 
-
-\begin{folgerung}
-\label{Folgerung 7.2}
-Sei \(I\subseteq\mdr\) ein Intervall, \(a=\inf I\) und \(f\colon I\to\mdr\) sei integrierbar. Definiert man \(F\colon I\to\mdr\) durch 
-\[F(t):=\int^t_a f(x)\,dx,\] so ist \(F\in C(I)\).
-\end{folgerung}
-
-\begin{beweis}
-Für \(x,t\in I\) definiere \(h(t,x):=\mathds{1}_{(a,t)}f(x)\). Dann ist \(F(t)=\int_I h(t,x)\,dx\) und 
-\[\lvert h(t,x)\rvert = \mathds{1}_{(a,t)}\cdot \lvert f(x)\rvert \leq \lvert f(x)\rvert \text{ für alle } t,x\in I\]
-Aus \ref{Satz 4.9} folgt, dass \(\lvert f\rvert\) integrierbar ist. Sei \(t_0\in I\) und \(N:=\{t_0\}\), also eine Nullmenge.
-Dann ist \(t\mapsto h(t,x)\) für jedes \(x\in I\setminus N\) stetig in \(t_0\) (zur Übung). Die Behauptung folgt aus \ref{Satz 7.1}.
-\end{beweis}
-
-\begin{satz}
-\label{Satz 7.3}
-Sei \(U\subseteq \mdr^k\) offen, \(f\colon U\times X\to\mdr\) eine Funktion. Es sei \(g\colon X\to [0,+\infty]\) integrierbar und \(N\subseteq X\) sei eine Nullmenge.
-Weiter gelte:
-\begin{enumerate}
-	\item 	für jedes \(t\in U\) sei \(x\mapsto f(t,x)\) integrierbar.
-	\item 	für jedes \(x\in X\setminus N\) sei \(t\mapsto f(t,x)\) partiell differenzierbar auf $U$.
-	\item 	\(\left\lvert \frac{ \partial f}{\partial t_j} \right\rvert \leq g(x) \) für jedes \(x\in X\setminus N\), jedes \(t\in U\) und jedes \(j\in\{1,\ldots,k\}\)
-\end{enumerate}
-Ist dann \(F\colon U\to\mdr\) definiert durch \[F(t):=\int_X f(t,x)dx\] so ist $F$ auf $U$ partiell differenzierbar und für jedes \( t\in U\) sowie jedes \( j\in\{1,\ldots,k\}\) gilt:
-\[ \frac{\partial F}{\partial t_j}(t) = \int_X\frac{\partial f}{\partial t_j}(t,x)\,dx \]
-\end{satz}
-\textbf{Also: } \( \frac{\partial}{\partial t_j}\int_X f(t,x)\,dx = \int_X \frac{\partial f}{\partial t_j}(t,x)\,dx \).
-
-\begin{beweis}
-Sei o.B.d.A. \(k=1\), also \(U\subseteq\mdr\). Sei \(t_0\in U\) und \((h_n)\) eine Folge mit \(h_n\to 0\) und \(h_n\neq 0\) für alle \(\natn\).
-Setze \[g_n(x):=\frac{f(t_0+h_n,x)-f(t_0,x)}{h_n} \ \ (x\in X, \natn) \]
-Aus Voraussetzung (2) folgt für jedes \(x\in X\setminus N\): \[ g_n(x)\to \frac{\partial f}{\partial t}(t_0,x) \ \ (n\to\infty) \]
-Nach dem Mittelwertsatz aus Analysis 1 existiert für jedes \(x\in X\setminus N\) und jedes \(\natn\) ein \(s_n=s_n(x)\) zwischen \(t_0\) und \(t_0+h_n\) mit:
-\[ \left\lvert g_n(x) \right\rvert = \left\lvert \frac{\partial f}{\partial t}(s_n,x)\right\rvert \overset{(3)}\leq g(x) \]
-Aus \ref{Satz 6.2} folgt \[ \int_X g_n\,dx \longrightarrow \int_X\frac{\partial f}{\partial t}(t_0,x)\,dx \]
-Es ist nach Konstruktion  gerade \(\int_X g_n\,dx =\frac{F(t_0+h_n)-F(t_0)}{h_n} \).
-\end{beweis}
 
 \chapter{Vorbereitungen auf das, was kommen mag}
 \label{Kapitel 8}
@@ -811,123 +567,61 @@ Definitionen:
 \begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
   \hline 
-  	& $ $ 
-  	& $ $ 
+  	& $p_1\colon\mdr^d\to\mdr^k$ 
+  	& $p_1(x,y):=x$ 
+  	& \\
+  \hline 
+  	& $ p_2\colon\mdr^d\to\mdr^l$ 
+  	& $p_2(x,y):=y$ 
+  	& \\
+  \hline 
+  	& $j_y\colon\mdr^k\to\mdr^d$ 
+  	& $j_y(x):=(x,y)$
+  		\newline \tiny mit $\in\mdr^l$
+  	& \\
+  \hline 
+  	& $j^x\colon\mdr^l\to\mdr^d$ 
+  	& $j^x(y):=(x,y)$
+  		\newline \tiny mit $x\in\mdr^k$
+  	& \\
+  \hline y-Schnitt
+  	& $C_y$ 
+  	& $\{x\in\mdr^k:(x,y)\in C\}=(j_y)^{-1}(C)$ 
+  		\newline \tiny mit $C\subseteq\mdr^d$
+  	& \\
+  \hline x-Schnitt
+  	& $C^x$ 
+  	& $\{y\in\mdr^l:(x,y)\in C\}=(j^x)^{-1}(C)$  
+  		\newline \tiny mit $C\subseteq\mdr^d$
+  	& \\
+  \hline 
+  	& $f_y(x)$ 
+  		\newline \tiny mit $f\colon\mdr^d\to\imdr$
+  		\newline $y$ fest
+  	& $f(x,y) \ \ (x\in\mdr^k)$ 
+  	& $f_y=f\circ j_y$\\
+  \hline 
+  	& $f^x(y)$ 
+  		\newline \tiny mit $f\colon\mdr^d\to\imdr$
+  		\newline $x$ fest
+  	& $f(x,y) \ \ (y\in\mdr^l)$ 
+  	& $f^x=f\circ j^x$\\
+  \hline 
+  	& $\varphi_C(x)$ 
+  		\newline \tiny mit $C\in\fb_d$
+  	& $\lambda_l(C^x) \ \ (x\in\mdr^k) $ 
+  	& \\
+  \hline 
+  	& $\psi_C(x)$ 
+  	& $\lambda_k(C_y) \ \ (y\in\mdr^l) $ 
   	& \\
 \end{longtable}
 
-
-
-In diesem Paragraphen seien \(k,l,d\in\mdn\) und \(k+l=d\). \(\mdr^d\cong\mdr^k\times\mdr^l\). Für Punkte \(z\in\mdr^d\) schreiben wir \(z=(x,y)\), wobei \(x\in\mdr^k\) und \(y\in\mdr^l\).
-
-\begin{definition}
-\begin{enumerate}
-	\item 	\(p_1\colon\mdr^d\to\mdr^k\) sei definiert durch \(p_1(x,y):=x\)
-	\item 	\(p_2\colon\mdr^d\to\mdr^l\) sei definiert durch \(p_2(x,y):=y\)
-	\item 	Für \(y\in\mdr^l\) sei \(j_y\colon\mdr^k\to\mdr^d\) definiert durch \(j_y(x):=(x,y)\)
-	\item 	Für \(x\in\mdr^k\) sei \(j^x\colon\mdr^l\to\mdr^d\) definiert durch \(j^x(y):=(x,y)\)
-\end{enumerate}
-\end{definition}
-
-\begin{lemma}
-\label{Lemma 8.1}
-\(p_1,p_2,j_y,\) und \(j^x\) sind messbar.
-\end{lemma}
-
-\begin{beweis}
-\(p_1,p_2,j_y\) und \(j^x\) sind stetig, also nach \ref{Satz 3.2} messbar.
-\end{beweis}
-
-\begin{definition}
-Sei \(C\subseteq\mdr^d\).\\
-Sei \(y\in\mdr^l\), dann heißt \(C_y:=\{x\in\mdr^k:(x,y)\in C\}=(j_y)^{-1}(C)\) der \textbf{y-Schnitt} von C.\\
-Sei \(x\in\mdr^k\), dann heißt \(C^x:=\{y\in\mdr^l:(x,y)\in C\}=(j^x)^{-1}(C)\) der \textbf{x-Schnitt} von C.
-\end{definition}
-
-\begin{lemma}
-\label{Lemma 8.2}
-Sei \(C\in\fb_d\). Dann ist \(C_y\in\fb_k\) und \(C^x\in\fb_l\).
-\end{lemma}
-
-\begin{beweis}
-folgt aus \ref{Lemma 8.1}.
-\end{beweis}
-
-\textbf{Beachte: } Sei \(A\in\mdr^k\) und \(B\in\mdr^l\), sowie \(C:=A\times B \subseteq\mdr^d\). Dann:
-\begin{align*}
-C_y=	\begin{cases}
-		{\varnothing, 	\text{falls } y\notin B}\\
-		{A,		\text{falls } y\in B}
-	 \end{cases}
-&
-&C^x=\begin{cases}
-		{\varnothing, 	\text{falls } x\notin A}\\
-		{B,		\text{falls } x\in A}
-	 \end{cases}
-\end{align*}	
-
-\begin{lemma}
-\label{Lemma 8.3}
-Sei \(A\in\fb_k\) und \(B\in\fb_l\). Dann ist \(C:=A\times B\in\fb_d\).
-\end{lemma}
-
-\begin{beweis}
-Es ist
-\[C=(A\times\mdr^l)\cap(\mdr^k\times B) = p_1^{-1}(A)\cap p_2^{-1}(B)\]
-Nach \ref{Lemma 8.1} sind \(p_1^{-1}(A), p_2^{-1}(B) \in\fb_d\) und somit ist auch \(p_1^{-1}(A)\cap p_2^{-1}(B) \in\fb_d\)
-\end{beweis}
-
-\begin{definition}
-Sei \(f\colon\mdr^d\to\imdr\). \\
-Für \(y\in\mdr^l\): \[f_y(x):=f(x,y) \ \ (x\in\mdr^k)\]
-Für \(x\in\mdr^k\): \[f^x(y):=f(x,y) \ \ (y\in\mdr^l)\]
-Es ist \(f_y=f\circ j_y\) und \(f^x=f\circ j^x\).
-\end{definition}
-
-\begin{lemma}
-\label{Lemma 8.4}
-Ist \(f\colon\mdr^d\to\imdr\) messbar, so sind \(f_y\) und \(f^x\) messbar.
-\end{lemma}
-
-\begin{beweis}
-folgt aus \ref{Lemma 8.1} und \ref{Lemma 8.3}.
-\end{beweis}
-
-%vielleicht funktioniert die nummerierung jetzt ...
-\begin{defusatz}[ohne Beweis] 
-\label{Satz 8.5}
-Sei \(C\in\fb_d\). Die Funktionen \(\varphi_C\) und \(\psi_C\) seien unter Beachtung von \ref{Lemma 8.2} definiert durch:
-\begin{align*}
-\varphi_C(x):=\lambda_l(C^x) \ \ (x\in\mdr^k) & & \psi_C(x):=\lambda_k(C_y) \ \ (y\in\mdr^l) 
-\end{align*}
-Dann sind \(\varphi_C\) und \(\psi_C\) messbar.
-\end{defusatz}
-
-
-\begin{bemerkung}
-Für \(C\in\fb_d\) gilt:
-\begin{align*}
-\varphi_C(x)=\lambda_l(C^x)=\int_{\mdr^l}\mathds{1}_{C^x}(y)\,dy=\int_{\mdr^l}\mathds{1}_{C}(x,y)\,dy \\
-\psi_C(y)=\lambda_k(C_y)=\int_{\mdr^k}\mathds{1}_{C_y}(x)\,dx=\int_{\mdr^k}\mathds{1}_{C}(x,y)\,dx
-\end{align*}
-\end{bemerkung}
 
 
 \chapter{Das Prinzip von Cavalieri}
 \label{Kapitel 9}
 
-
-Definitionen:
-
-\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
-  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
-  \hline 
-  	& $ $ 
-  	& $ $ 
-  	& \\
-\end{longtable}
-
-Die Bezeichnungen seien wie im Paragraphen 8.
 
 \begin{satz}[Prinzip von Cavalieri]
 \label{Satz 9.1}
@@ -938,154 +632,21 @@ Das heißt:
 \[ \int_{\mdr^d}\mathds{1}_{C}(x,y) \text{ d}(x,y) = \int_{\mdr^k}\left(\int_{\mdr^l} \mathds{1}_{C}(x,y)\,dy\right)\,dx = \int_{\mdr^l} \left(\int_{\mdr^k} \mathds{1}_{C}(x,y)\,dx\right)\,dy \]
 
 
-\begin{beispiel}
-\begin{enumerate}
-	\item	Sei \(k=l=1\), also \(d=2\). Sei \(r>0\) und \[C:=\{(x,y)\in\mdr^2: x^2+y^2\leq r^2\}\]
-		 Da $C$ abgeschlossen ist, gilt \(C\in\fb_2\).\\
-		Ist \(\lvert y\rvert>r\), so ist \(C_y=\varnothing\), also \(\lambda_1(C_y)=0\).\\
-		Sei also \(\lvert y\rvert\leq r\). Sei \(x\in\mdr\) so, dass \((x,y)\in\partial C\). Dann ist \(x^2+y^2=r^2\), also \(x=\pm\sqrt{r^2-y^2}\).
-		Das heißt, es ist  \[C_y=\left[-\sqrt{r^2-y^2},+\sqrt{r^2-y^2}\right]\text{ und } \lambda_1(C_y)=2\sqrt{r^2-y^2}\]
-		Aus \ref{Satz 9.1} folgt:
-		\begin{align*}
-			\lambda_2(C)
-			&=\int_\mdr\lambda_1(C_y)\,dy \\
-			&=\int_{[-r,r]}\lambda_1(C_y)\,dy + \int_{\mdr\setminus [-r,r]}\lambda_1(C_y)\,dy\\
-			&=\int_{[-r,r]}2\sqrt{r^2-y^2}\,dy\\
-			&\overset{\ref{Satz 4.13}}= \text{R-}\int^r_{-r}2\sqrt{r^2-y^2}\,dy\\
-			&\overset{Ana I}= \pi r^2
-		\end{align*}
-	\item 	Sei \(\varnothing\neq X\subseteq\mdr^d\). $X$ sei kompakt, also \(X\in\fb_d\). Weiter sei \(f\colon X\to[0,\infty)\) stetig, woraus mit \ref{Satz 4.11} \(f\in\mathfrak{L}^1(X)\) folgt.
-		Setze \[C:=\{(x,y):x\in X, 0\leq y\leq f(x)\}\] 
-		$C$ ist kompakt und somit gilt: \(C\in\fb_{d+1}\).\\
-		Ist \(x\notin X\), so ist \(C^x=\varnothing\), also \(\lambda_1(C^x)=0\).\\
-		Ist \(x\in X\), so ist \(C^x=[0,f(x)]\), also \(\lambda_1(C^x)=f(x)\). Damit gilt
-		\[\lambda_{d+1}(C) \overset{\ref{Satz 9.1}}= \int_{\mdr^d}\lambda_1(C^x)\,dx = \int_X\lambda_1(C^x)\,dx + \int_{\mdr^d\setminus X}\lambda_1(C^x) \text{ d}x = \int_Xf(x)\,dx \]
-	\item 	Sei \(I=[a,b]\subseteq\mdr\) mit \(a<b\) und \(f\colon I\to[0,\infty]\) stetig. Setze
-		\[C:=\{(x,y)\in\mdr^2:x\in I, 0\leq y\leq f(x)\}\]
-		Aus Beispiel (2) und \ref{Satz 4.13} folgt \[\lambda_2(C)=\text{R-}\int_a^bf(x)\,dx \]
-	\item 	$X$ und $f$ seien wie in Beispiel (2). Setze \[G:=\{(x,f(x)):x\in X\}\]
-		$G$ ist kompakt, also ist \(G\in\fb_2\). 
-		Ist \(x\notin X\), so ist \(G^x=\varnothing\), also \(\lambda_1(G^x)=0\).
-		Ist \(x\in X\), so ist \(G^x=\{f(x)\}\), also \(\lambda_1(G^x)=0\).
-		Aus \ref{Satz 9.1} folgt \[\lambda_2(G)=\int_\mdr\lambda_1(G^x)\,dx=0\]
-\end{enumerate}
-\end{beispiel}
+Definitionen:
 
-\begin{beweis}[Prinzip von Cavalieri]
-Wir definieren $\mu,\nu:\fb_d\to[0,\infty]$ durch:
-\begin{align*}
-\mu(A):=\int_{\mdr^k} \lambda_l(A^x)\text{ d}x && \nu(A):=\int_{\mdr^l} \lambda_k(A_y)\text{ d}y
-\end{align*}
-Dann ist klar, dass $\mu(\varnothing)=\nu(\varnothing)=\lambda_d(\varnothing)=0$ ist.\\
-Sei $(A_j)$ eine disjunkte Folge in $\fb_d$. Dann ist $(A_j^x)$ ebenfalls disjunkt und $(\bigcup A_j)^x=\bigcup A_j^x$. Somit gilt:
-\begin{align*}
-\mu(\bigcup A_j)&=\int_{\mdr^k} \lambda_l(\bigcup A_j^x)\text{ d}x\\
-&=\int_{\mdr^k} \sum \lambda_l(A_j^x)\text{ d}x\\
-&=\sum \int_{\mdr^k} \lambda_l(A_j^x)\text{ d}x\\
-&=\sum \mu(A_j)
-\end{align*}
-D.h. $\mu$ ist ein Maß auf $\fb_d$. Analog lässt sich zeigen, dass $\nu$ ein Maß auf $\fb_d$ ist.\\
-Sei nun $I\in\ci_d$, dann existieren $I'\in\ci_k, I''\in\ci_l$ mit $I=I'\times I''$. Aus §\ref{Kapitel 8} folgt:
-\begin{align*}
-I^x=\begin{cases} I''&,x\in I'\\ 
-\varnothing &,x\not\in I'\end{cases}
-\end{align*}
-Also ist $\lambda_l(I^x)=\lambda_l(I'')\cdot\mathds{1}_{I'}(x)$ und damit:
-\begin{align*}
-\mu(I)&=\int_{\mdr^k}\lambda_l(I'')\cdot\mathds{1}_{I'}(x) \text{ d}x\\
-&=\lambda_l(I'')\cdot\lambda_k(I') = \lambda_d(I)
-\end{align*}
-D.h. auf $\ci_d$ stimmen $\mu$ und $\lambda_d$ überein. Analog gilt $\nu=\lambda_d$ auf $\ci_d$. Da $\ci_d$ die Vorraussetzungen des Satzes \ref{Satz 2.6} erfüllt, gilt $\mu=\lambda_d=\nu$ auf $\fb_d$.
-\end{beweis}
-
-\begin{folgerung}
-\label{Folgerung 9.2}
-\begin{enumerate}
-\item Sei $N\in\fb_d$. Dann gilt:
-\begin{align*}
-\lambda_d(N)=0 &\iff \lambda_l(N^x) = 0 \quad \text{ f.ü. auf }\mdr^k\\
-&\iff \lambda_k(N_y) = 0 \quad \text{ f.ü. auf }\mdr^l\\
-\end{align*}
-\item Sei $M\subseteq\mdr^k$ ($M\subseteq\mdr^l$) eine Nullmenge, dann ist $M\times\mdr^l$ ($\mdr^k\times M$) eine Nullmenge.
-\end{enumerate}
-\end{folgerung}
-
-\begin{beweis}
-\begin{enumerate}
-\item Nach \ref{Satz 9.1} gilt:
-\[\lambda_d(N)=\int_{\mdr^k}\lambda_l(N^x)\text{ d}x\]
-Nach \ref{Satz 5.2}(2) folgt die Behauptung. Analog lässt sich die zweite Äquivalenz zeigen.
-\item Es gilt:
-\[\forall y\in\mdr^l:(M\times\mdr^l)_y=M\]
-Damit folgt die Behauptung aus (1).
-\end{enumerate}
-\end{beweis}
-
-\begin{lemma}
-\label{Lemma 9.3}
-Sei $\varnothing\ne D\in\fb_d$ und $f:D\to\imdr$ messbar. Definiere
-\[\tilde f(z):=\begin{cases} f(z) &,z\in D\\ 0&,z\not\in D\end{cases}\]
-Dann ist $\tilde f:\mdr^d\to\imdr$ messbar.
-\end{lemma}
-
-\begin{beweis}
-Sei $a\in\mdr$, $B_a:=\{n\in\mdr^d\mid \tilde f(z)\le a\}$.\\
-\textbf{Fall $a<0$:}
-\[B_a=\{z\in D\mid f(z)\le a\}\stackrel{\ref{Satz 3.4}}\in\fb_d\]
-\textbf{Fall $a\ge0$:}
-\[B_a=\{z\in D\mid f(z)\le a\}\cup \{z\in\mdr^d\setminus D\}\in\fb_d\]
-Also folgt aus \ref{Satz 3.4} die Messbarkeit von $\tilde f$.
-\end{beweis}
-
-\begin{beispiel}
-\index{Rotationskörper}
-\begin{enumerate}
-\item Sei $r>0$ und 
-\[K:=\{(x,y)\in\mdr^2\mid x^2+y^2<r^2\}\]
-Dann ist $K$ offen, also $K\in\fb_2$ und es gilt:
-\[\partial K=\overline{K}\setminus K=\{(x,y)\in\mdr^2\mid x^2+y^2=r^2\}\in\fb_2\]
-Damit enthält die Menge $(\partial K)_y$ für alle $x\in\mdr$ höchstens zwei Elemente, d.h.
-\[\lambda_2(\partial K)=\int_\mdr \lambda_1((\partial K)_y)\text{ d}y=0\]
-Mit $\overline K=(\partial K) \dot\cup K$ folgt dann
-\[\lambda_2(K)=\lambda_2(\partial K)+\lambda_2(\overline K)=\lambda_2(\overline K)=\pi r^2\]
-Sei nun $A\in\fb_2$ mit $K\subseteq A\subseteq\overline K$, dann ist $\lambda_2(A)=\pi r^2$.
-\item Sei $r>0$ und 
-\[K:=\{(x,y,z)\in\mdr^3\mid x^2+y^2+z^2\le r^2\}\]
-Dann ist $K$ abgeschlossen, also $K\in\fb_3$.\\
-\textbf{Fall $|z|>r$:} Es ist $K_z=\varnothing$, also $\lambda_2(K_z)=0$.\\
-\textbf{Fall $|z|\ge r$:} Es ist
-\[K_z=\{(x,y)\in\mdr^2\mid x^2+y^2\le r^2-z^2\}\]
-und damit $\lambda_2(K_z)=\pi(r^2-z^2)$.\\
-Aus \ref{Satz 9.1} folgt dann:
-\begin{align*}
-\lambda_3(K)&=\int_\mdr \lambda_2(K_z)\text{ d}z\\
-&=\int_{[-r,r]}\lambda_2(K_z)\text{ d}z+\int_{\mdr\setminus[-r,r]}\lambda_2(K_z)\text{ d}z\\
-&=\int_{[-r,r]}\pi(r^2-z^2)\text{ d}z\\
-&\stackrel{\ref{Satz 4.13}}=\int_{-r}^r \pi r^2-\pi z^2\text{ d}z\\
-&=\frac43\pi r^3
-\end{align*}
-\item $\lambda_2\left(\text{\smiley}\right)=0$
-\item Wir wollen nun \textbf{Rotationskörper} betrachten. Sei dazu $I=[a,b]\subseteq\mdr$ mit $a<b$ und $f:I\to[0,\infty)$ messbar. Definiere nun
-\[V:=\{(x,y,z,)\in\mdr^3\mid x^2+y^2\le f(z)^2, z\in I\}\]
-Setze $D:=\mdr^2\times I$ und $g(x,y,z):= x^2+y^2-f(z)^2$. Dann ist $g$ nach §\ref{Kapitel 3} messbar und $V=\{g\le 0\}\in\fb_3$.\\
-\textbf{Fall $z\not\in I$:} Es so ist $V_z=\varnothing$, also $\lambda_2(V_z)=0$.\\
-\textbf{Fall $z\in I$:} Es ist
-\[V_z=\{(x,y)\in\mdr^2\mid x^2+y^2\le f(z)^2\}\]
-und damit $\lambda_2(V_z)=\pi f(z)^2$.\\
-Aus \ref{Satz 9.1} folgt dann:
-\begin{align*}
-\lambda_3(V)&=\int_\mdr \lambda_2(V_z)\text{ d}z\\
-&= \pi\int_a^b f(z)^2\text{ d}z 
-\end{align*}
-\item Sei $h>0$, $I=[0,h]$ und $f(z)=\frac rhz$. Definiere den Kegel
-\[V:=\{(x,y,z)\in\mdr^3\mid x^2+y^2\le \frac{r^2}{h^2}z^2\}\]
-Dann ist
-\begin{align*}
-\lambda_3(V)&=\pi\int_0^h \frac{r^2}{h^2}z^2\text{ d}z\\
-&=\frac{\pi r^2h}3
-\end{align*}
-\end{enumerate}
-\end{beispiel}
+\begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
+  \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
+  \hline 
+  	& $\tilde f:\mdr^d\to\imdr$ 
+  	 \newline \tiny mit $\varnothing\ne D\in\fb_d$ 
+  	 \newline und $f:D\to\imdr$ messbar
+  	& $f(z) := \begin{cases} f(z) &,z\in D\\ 0&,z\not\in D\end{cases}$ 
+  	& $\tilde f$ messbar\\
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
+\end{longtable}
 
 \chapter{Der Satz von Fubini}
 \label{Kapitel 10}
@@ -1095,43 +656,18 @@ Definitionen:
 
 \begin{longtable}{ m{2.5cm} m{3cm} m{5cm} m{6cm} }
   \textbf{Name} & Symbol & Definition & in Worten/Kommentar \\ 
+  \hline iterierte Integrale
+  	& \multicolumn{3}{m{12cm}}{$$\int_{\mdr^d}f(x,y)\,d(x,y)=\int_{\mdr^k}\left(\int_{\mdr^l}f(x,y)\,dy\right)dx=\int_{\mdr^l}\left(\int_{\mdr^k}f(x,y)\,dx\right)dy$$}\\
+  \hline 
+  	& $ $ 
+  	& $ $ 
+  	& \\
   \hline 
   	& $ $ 
   	& $ $ 
   	& \\
 \end{longtable}
 
-Die Bezeichnungen seien wie in den Paragraphen 8 und 9.
-
-\begin{satz}[Satz von Tonelli]
-\label{Satz 10.1}
-Es sei \(f\colon\mdr^d\to[0,+\infty]\) messbar. (Aus \S 8 folgt dann, dass \(f^x,f_y\) messbar sind, wobei klar ist, dass \(f^x,f_y\geq 0\) sind.)\\
-Für \(x\in\mdr^k\):
-\[F(x):=\int_{\mdr^l}f(x,y)\,dy=\int_{\mdr^l}f^x(y)\,dy\]
-Für \(y\in\mdr^l\):
-\[G(y):=\int_{\mdr^k}f(x,y)\,dx=\int_{\mdr^k}f_y(x)\,dx\]
-Dann sind $F,G$ messbar und 
-\[\int_{\mdr^d}f(z)\,dz=\int_{\mdr^k}F(x)\,dx=\int_{\mdr^l}G(y)\,dy\]
-also
-\begin{align*}
-\tag{$*$}\int_{\mdr^d}f(x,y)\,d(x,y)=\int_{\mdr^k}\left(\int_{\mdr^l}f(x,y)\,dy\right)dx=\int_{\mdr^l}\left(\int_{\mdr^k}f(x,y)\,dx\right)dy
-\end{align*}
-\textbf{(iterierte Integrale)}
-\end{satz}
-
-\begin{beweis}
-\textbf{Fall 1:} Sei \(C\in\fb_d\) und \(f=\mathds{1}_{C}\). Die Behauptungen folgen dann aus \ref{Satz 9.1}.\\
-\textbf{Fall 2:} Sei \(f\geq 0\) und einfach. Die Behauptungen folgen aus Fall 1, \ref{Satz 3.6} und \ref{Satz 4.5}.\\
-\textbf{Fall 3 - Der allgemeine Fall:}\\
- Sei \((f_n)\) zulässig für $f$, also: \(0\leq f_n\leq f_{n+1}\), \(f_n\) einfach und \(f_n\to f\) auf \(\mdr^d\).
-Für \(x\in\mdr^k\) und \(\natn\) gilt:
-\[F_n(x):=\int_{\mdr^l}f_n(x,y)\,dy\]
-und nach Fall 2 ist \(F_n\) messbar. \\
-Aus \(0\leq f_n\leq f_{n+1}\) folgt \(0\leq F_n\leq F_{n+1}\) und \ref{Satz 4.6} liefert \(F_n\to F\) auf \(\mdr^k\). Dann gilt
-\[\int_{\mdr^d}f(z)\,dz = \lim \int_{\mdr^d}f_n(z)\,dz \overset{Fall 2}= \lim \int_{\mdr^k}F_n(x)\,dx \overset{\ref{Satz 4.6}}=\int_{\mdr^k}F(x)\,dx\]
-Genauso zeigt man 
-\[\int_{\mdr^d}(f(z)\,dz=\int_{\mdr^l}G(y)\,dy\]
-\end{beweis}
 
 \begin{satz}[Satz von Fubini (Version I)]
 \label{Satz 10.2}
@@ -1409,6 +945,13 @@ und daraus folgt \(\int_0^\infty e^{-xy}\,dy=\frac1x\)
 	\[I_R=\frac{\pi}2-\tilde I_R\to\frac{\pi}2 \ (R\to\infty)\]	
 \end{enumerate}
 \end{beispiel}
+
+
+
+
+\iffalse
+
+
 
 
 \chapter{Der Transformationssatz (Substitutionsregel)}
